@@ -20,6 +20,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$SCRIPT_DIR/mautic-n8n-stack"
 COMPOSE_FILE="$PROJECT_DIR/docker-compose.yml"
 ENV_FILE="$PROJECT_DIR/.env"
+BACKUP_CREDENTIALS_FILE="$PROJECT_DIR/.env.backup"
 
 # Function to print colored output
 print_status() {
@@ -101,16 +102,17 @@ update_system() {
 # Configure firewall
 setup_firewall() {
     print_status "Configuring UFW firewall..."
-    
+
     sudo ufw --force reset > /dev/null 2>&1
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
     sudo ufw allow 22/tcp
     sudo ufw allow 80/tcp
     sudo ufw allow 443/tcp
+    sudo ufw allow 3100/tcp comment 'n8n MCP Server'
     sudo ufw --force enable > /dev/null 2>&1
-    
-    print_success "Firewall configured (ports 22, 80, 443 open)"
+
+    print_success "Firewall configured (ports 22, 80, 443, 3100 open)"
 }
 
 # Install Docker
@@ -531,7 +533,7 @@ services:
     networks:
       - mautic_network
 
-  # n8n Workflow Automation
+  # n8n Workflow Automation (MCP Server Ready)
   n8n:
     image: n8nio/n8n:latest
     container_name: n8n
@@ -548,7 +550,12 @@ services:
       - N8N_VERSION_NOTIFICATIONS_ENABLED=false
       - N8N_TEMPLATES_ENABLED=true
       - N8N_ONBOARDING_FLOW_DISABLED=true
-  # === WORKFLOW API VARIABLES ===
+      # === MCP SERVER CONFIGURATION ===
+      - N8N_MCP_ENABLED=true
+      - N8N_MCP_SERVER_PORT=3100
+      - N8N_AI_ENABLED=true
+      - N8N_AI_OPENAI_API_KEY=${OPENAI_API_KEY}
+      # === WORKFLOW API VARIABLES ===
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
@@ -565,6 +572,8 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - REDIS_URL=${REDIS_URL}
 
+    ports:
+      - "3100:3100"  # MCP Server Port
     volumes:
       - n8n_data:/home/node/.n8n
     labels:
@@ -702,14 +711,14 @@ view_logs() {
     clear
     print_header "Service Logs"
     echo
-    
+
     cd "$PROJECT_DIR"
     echo "Available services:"
     docker-compose ps --services
     echo
-    
+
     read -p "Enter service name (or 'all' for all services): " service_name
-    
+
     if [[ "$service_name" == "all" ]]; then
         docker-compose logs --tail=100 -f
     else
@@ -717,51 +726,59 @@ view_logs() {
     fi
 }
 
-create_backup() {
-    local backup_dir="$PROJECT_DIR/backups/$(date +%Y-%m-%d_%H-%M-%S)"
-    mkdir -p "$backup_dir"
-    
-    print_status "Creating backup in $backup_dir..."
-    
-    cd "$PROJECT_DIR"
-    
-    # Backup database
-    if docker-compose ps mysql | grep -q Up; then
-        print_status "Backing up MySQL database..."
-        docker-compose exec -T mysql mysqladump -u root -p"$MYSQL_ROOT_PASSWORD" --all-databases > "$backup_dir/database.sql" 2>/dev/null
+# Load or configure backup credentials
+setup_backup_credentials() {
+    if [[ -f "$BACKUP_CREDENTIALS_FILE" ]]; then
+        source "$BACKUP_CREDENTIALS_FILE"
+        return 0
     fi
-    
-    # Backup environment and compose files
-    cp "$ENV_FILE" "$backup_dir/"
-    cp "$COMPOSE_FILE" "$backup_dir/"
-    
-    # Backup volumes
-    print_status "Backing up application data..."
-    docker run --rm \
-        -v "$(docker volume ls -q | grep mautic-n8n-stack_mautic_data_config | head -1)":/source:ro \
-        -v "$backup_dir":/backup \
-        alpine tar czf /backup/mautic_config.tar.gz -C /source . 2>/dev/null || true
-        
-    docker run --rm \
-        -v "$(docker volume ls -q | grep mautic-n8n-stack_n8n_data | head -1)":/source:ro \
-        -v "$backup_dir":/backup \
-        alpine tar czf /backup/n8n_data.tar.gz -C /source . 2>/dev/null || true
-    
-    # Create backup info file
-    cat > "$backup_dir/backup_info.txt" << EOF
-Backup created: $(date)
-Server IP: $SERVER_IP
-Mautic URL: $MAUTIC_URL
-n8n URL: $N8N_URL
-Docker Compose Version: $(docker-compose version --short 2>/dev/null || echo "Unknown")
+
+    clear
+    print_header "AWS S3 Backup Configuration"
+    echo
+    print_status "First-time S3 backup setup. Credentials will be stored securely."
+    echo
+
+    read -p "Enter AWS S3 bucket name: " AWS_S3_BUCKET
+
+    echo
+    print_status "AWS Credentials (leave empty to use AWS CLI/IAM role):"
+    read -p "AWS Access Key ID (optional): " AWS_ACCESS_KEY_ID
+    if [[ -n "$AWS_ACCESS_KEY_ID" ]]; then
+        read -sp "AWS Secret Access Key: " AWS_SECRET_ACCESS_KEY
+        echo
+    fi
+
+    echo
+    print_status "Backup Retention Policy:"
+    read -p "Keep last N backups locally (default: 5): " LOCAL_BACKUP_RETENTION
+    LOCAL_BACKUP_RETENTION=${LOCAL_BACKUP_RETENTION:-5}
+
+    # Save credentials securely
+    cat > "$BACKUP_CREDENTIALS_FILE" << EOF
+# AWS S3 Backup Configuration
+# Created: $(date)
+AWS_S3_BUCKET="$AWS_S3_BUCKET"
+AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
+AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
+LOCAL_BACKUP_RETENTION=$LOCAL_BACKUP_RETENTION
 EOF
-    
-    print_success "Backup completed: $backup_dir"
-    
-    # Cleanup old backups (keep last 5)
-    find "$PROJECT_DIR/backups" -maxdepth 1 -type d -name "20*" | sort | head -n -5 | xargs rm -rf 2>/dev/null || true
-    
-    read -p "Press Enter to continue..."
+
+    chmod 600 "$BACKUP_CREDENTIALS_FILE"
+    print_success "Backup credentials saved securely to $BACKUP_CREDENTIALS_FILE"
+    echo
+
+    # Source the file
+    source "$BACKUP_CREDENTIALS_FILE"
+}
+
+create_backup() {
+    # Call enhanced backup script with S3 support
+    "$SCRIPT_DIR/backup-to-s3.sh"
+
+    # Return to menu
+    echo
+    read -p "Press Enter to return to menu..."
 }
 
 update_images() {
