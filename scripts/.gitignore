@@ -1,0 +1,42 @@
+# V5 Production Stack - Git Ignore
+
+# Environment files (contain secrets)
+.env
+.s3-config
+*.backup
+
+# Backup files
+backups/
+*.tar.gz
+*.sql
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node modules (Strapi)
+mautic-n8n-stack*/strapi/node_modules/
+mautic-n8n-stack*/strapi/.cache/
+mautic-n8n-stack*/strapi/build/
+mautic-n8n-stack*/strapi/.tmp/
+
+# Docker volumes data (too large)
+mautic-n8n-stack*/
+
+# Keep only scripts and docs
+!*.sh
+!*.md
+!.gitignore
