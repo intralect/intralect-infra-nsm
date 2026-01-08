@@ -51,7 +51,7 @@ module.exports = {
         brand,
         category,
         collectionType,
-        method = 'dalle3' // Default to DALL-E 3 (Gemini Image not available on free tier)
+        method = 'gemini' // Default to Gemini 2.5 Flash Image (paid plan enabled)
       } = ctx.request.body;
 
       if (!title) {
