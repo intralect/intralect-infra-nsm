@@ -73,9 +73,12 @@ module.exports = {
         collectionType || null // Pass collection type for brand-specific settings
       );
 
-      // Choose image generation method
+      let usedMethod = method;
+      let fallbackUsed = false;
+
+      // Choose image generation method with automatic fallback
       if (method === 'dalle3') {
-        // DALL-E 3 method (original - requires OpenAI API)
+        // DALL-E 3 method (explicit request)
         const openai = require('../../../services/openai');
 
         if (!openai.isConfigured()) {
@@ -95,16 +98,60 @@ module.exports = {
           message: 'Download and upload to Media Library'
         };
       } else {
-        // Gemini native image generation (default - better quality, simpler)
-        const imageData = await gemini.generateImageNative(prompt);
+        // Try Gemini first, fallback to DALL-E 3 if it fails
+        try {
+          console.log('Attempting Gemini image generation...');
+          const imageData = await gemini.generateImageNative(prompt);
 
-        ctx.body = {
-          method: 'gemini',
-          prompt,
-          imageBase64: imageData.base64,
-          mimeType: imageData.mimeType,
-          message: 'Base64 image ready - convert to blob and upload to Media Library'
-        };
+          ctx.body = {
+            method: 'gemini',
+            prompt,
+            imageBase64: imageData.base64,
+            mimeType: imageData.mimeType,
+            message: 'Base64 image ready - convert to blob and upload to Media Library'
+          };
+        } catch (geminiError) {
+          // Check if it's a recoverable error (503, 429, timeout, etc.)
+          const errorMsg = geminiError.message || '';
+          const isRecoverable =
+            errorMsg.includes('503') ||
+            errorMsg.includes('overloaded') ||
+            errorMsg.includes('429') ||
+            errorMsg.includes('quota') ||
+            errorMsg.includes('timeout');
+
+          if (isRecoverable) {
+            console.warn('Gemini failed (overloaded/quota), falling back to DALL-E 3:', errorMsg.substring(0, 100));
+
+            // Fallback to DALL-E 3
+            const openai = require('../../../services/openai');
+
+            if (!openai.isConfigured()) {
+              throw new Error('Gemini overloaded and OpenAI not configured. Cannot generate image.');
+            }
+
+            const imageUrl = await openai.generateImage(prompt, {
+              size: '1792x1024',
+              quality: 'standard',
+              style: 'vivid',
+            });
+
+            usedMethod = 'dalle3';
+            fallbackUsed = true;
+
+            ctx.body = {
+              method: 'dalle3',
+              fallback: true,
+              originalError: 'Gemini overloaded',
+              prompt,
+              imageUrl,
+              message: 'Gemini was overloaded - used DALL-E 3 fallback. Download and upload to Media Library'
+            };
+          } else {
+            // Non-recoverable error, throw it
+            throw geminiError;
+          }
+        }
       }
     } catch (error) {
       ctx.throw(500, error.message);
