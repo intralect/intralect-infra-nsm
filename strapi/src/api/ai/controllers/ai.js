@@ -64,14 +64,35 @@ module.exports = {
         return ctx.badRequest('Gemini not configured');
       }
 
-      // Generate the image prompt (same for both methods)
-      const prompt = await gemini.generateImagePrompt(
-        title,
-        content || '',
-        brand || {},
-        category || null,
-        collectionType || null // Pass collection type for brand-specific settings
-      );
+      // Generate the image prompt with fallback
+      let prompt;
+      let promptFallback = false;
+
+      try {
+        // Try to generate detailed prompt with Gemini
+        prompt = await gemini.generateImagePrompt(
+          title,
+          content || '',
+          brand || {},
+          category || null,
+          collectionType || null
+        );
+      } catch (promptError) {
+        // If Gemini text model is overloaded, use simple fallback prompt
+        console.warn('Gemini prompt generation failed, using fallback prompt:', promptError.message.substring(0, 100));
+        promptFallback = true;
+
+        // Create a simple but effective prompt based on collection type
+        const collectionPrompts = {
+          'yaicos-article': `Professional documentary photograph for international education blog titled "${title}". Show diverse young international students aged 18-30 from various ethnicities (Asian, African, European, Latin American, Middle Eastern) engaged in authentic educational activities. Captured with Canon EOS R5, 35mm f/2.8 lens, natural lighting, golden hour warmth. Real humans in genuine candid moments, shot from behind or at angles (no direct face shots). Modern, welcoming, aspirational atmosphere. Bright blues, warm oranges, natural daylight. Wide landscape format 1792x1024. Documentary/photojournalism style like National Geographic. STRICTLY: Professional DSLR photography only - NO cartoon, illustration, 3D render, CGI, or animated style.`,
+
+          'guardscan-article': `Professional technical photograph for cybersecurity blog titled "${title}". High-tech security visualization with deep blues, cyber green, electric blue accents on dark background. Advanced network security, encryption visualization, threat detection systems. Sophisticated enterprise-grade security aesthetic similar to CrowdStrike or Palo Alto Networks. Shot on professional camera, dramatic lighting. Wide landscape 1792x1024. NO faces, hands, text, or logos. Technical and cutting-edge style.`,
+
+          'amabex-article': `Professional corporate photograph for business procurement blog titled "${title}". Clean, systematic corporate aesthetic with corporate blues, silver/gray accents, white space. Abstract representation of supply chains, business networks, procurement processes. Fortune 500 company style, trustworthy and professional. Shot on professional camera. Wide landscape 1792x1024. NO faces, hands, text, or informal elements.`
+        };
+
+        prompt = collectionPrompts[collectionType] || `Professional photograph for blog article titled "${title}". Modern, clean, professional aesthetic. Wide landscape format 1792x1024. High quality DSLR photography. NO text, logos, or cluttered elements.`;
+      }
 
       let usedMethod = method;
       let fallbackUsed = false;
@@ -95,7 +116,8 @@ module.exports = {
           method: 'dalle3',
           prompt,
           imageUrl,
-          message: 'Download and upload to Media Library'
+          promptFallback,
+          message: promptFallback ? 'Gemini text model was overloaded - used simple prompt. Download and upload to Media Library' : 'Download and upload to Media Library'
         };
       } else {
         // Try Gemini first, fallback to DALL-E 3 if it fails
@@ -108,7 +130,8 @@ module.exports = {
             prompt,
             imageBase64: imageData.base64,
             mimeType: imageData.mimeType,
-            message: 'Base64 image ready - convert to blob and upload to Media Library'
+            promptFallback,
+            message: promptFallback ? 'Gemini text model was overloaded - used simple prompt. Base64 image ready - convert to blob and upload to Media Library' : 'Base64 image ready - convert to blob and upload to Media Library'
           };
         } catch (geminiError) {
           // Check if it's a recoverable error (503, 429, timeout, etc.)
@@ -142,10 +165,13 @@ module.exports = {
             ctx.body = {
               method: 'dalle3',
               fallback: true,
-              originalError: 'Gemini overloaded',
+              originalError: 'Gemini image generation overloaded',
               prompt,
               imageUrl,
-              message: 'Gemini was overloaded - used DALL-E 3 fallback. Download and upload to Media Library'
+              promptFallback,
+              message: promptFallback
+                ? 'Both Gemini services were overloaded - used simple prompt + DALL-E 3. Download and upload to Media Library'
+                : 'Gemini image generation was overloaded - used DALL-E 3 fallback. Download and upload to Media Library'
             };
           } else {
             // Non-recoverable error, throw it
