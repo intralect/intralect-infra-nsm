@@ -333,6 +333,39 @@ Article:`;
     }
   },
 
+  async generateImageNative(prompt, options = {}) {
+    if (!geminiClient) {
+      if (!process.env.GEMINI_API_KEY) throw new Error('Gemini not configured');
+      geminiClient = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    }
+
+    try {
+      // Use Gemini 2.5 Flash Image model for native image generation
+      const imageModel = geminiClient.getGenerativeModel({
+        model: 'gemini-2.5-flash-image'
+      });
+
+      const result = await imageModel.generateContent(prompt);
+      const response = await result.response;
+
+      // Extract inline image data from response
+      for (const part of response.candidates[0].content.parts) {
+        if (part.inlineData) {
+          // Return base64 image data
+          return {
+            base64: part.inlineData.data,
+            mimeType: part.inlineData.mimeType || 'image/png'
+          };
+        }
+      }
+
+      throw new Error('No image data in response');
+    } catch (error) {
+      console.error('Gemini Image Generation Error:', error.message);
+      throw error;
+    }
+  },
+
   isConfigured() {
     return !!process.env.GEMINI_API_KEY;
   },

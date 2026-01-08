@@ -45,19 +45,26 @@ module.exports = {
   
   async generateImage(ctx) {
     try {
-      const { title, content, brand, category, collectionType } = ctx.request.body;
+      const {
+        title,
+        content,
+        brand,
+        category,
+        collectionType,
+        method = 'gemini' // Default to Gemini native, can be 'gemini' or 'dalle3'
+      } = ctx.request.body;
 
       if (!title) {
         return ctx.badRequest('Title required');
       }
 
       const gemini = require('../../../services/gemini');
-      const openai = require('../../../services/openai');
 
-      if (!gemini.isConfigured() || !openai.isConfigured()) {
-        return ctx.badRequest('AI services not configured');
+      if (!gemini.isConfigured()) {
+        return ctx.badRequest('Gemini not configured');
       }
 
+      // Generate the image prompt (same for both methods)
       const prompt = await gemini.generateImagePrompt(
         title,
         content || '',
@@ -66,17 +73,39 @@ module.exports = {
         collectionType || null // Pass collection type for brand-specific settings
       );
 
-      const imageUrl = await openai.generateImage(prompt, {
-        size: '1792x1024',
-        quality: 'standard',
-        style: 'vivid',
-      });
+      // Choose image generation method
+      if (method === 'dalle3') {
+        // DALL-E 3 method (original - requires OpenAI API)
+        const openai = require('../../../services/openai');
 
-      ctx.body = {
-        prompt,
-        imageUrl,
-        message: 'Download and upload to Media Library'
-      };
+        if (!openai.isConfigured()) {
+          return ctx.badRequest('OpenAI not configured for DALL-E 3');
+        }
+
+        const imageUrl = await openai.generateImage(prompt, {
+          size: '1792x1024',
+          quality: 'standard',
+          style: 'vivid',
+        });
+
+        ctx.body = {
+          method: 'dalle3',
+          prompt,
+          imageUrl,
+          message: 'Download and upload to Media Library'
+        };
+      } else {
+        // Gemini native image generation (default - better quality, simpler)
+        const imageData = await gemini.generateImageNative(prompt);
+
+        ctx.body = {
+          method: 'gemini',
+          prompt,
+          imageBase64: imageData.base64,
+          mimeType: imageData.mimeType,
+          message: 'Base64 image ready - convert to blob and upload to Media Library'
+        };
+      }
     } catch (error) {
       ctx.throw(500, error.message);
     }
