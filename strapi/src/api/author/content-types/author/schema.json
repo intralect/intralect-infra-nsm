@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "authors",
+  "info": {
+    "singularName": "author",
+    "pluralName": "authors",
+    "displayName": "Author",
+    "description": "Blog authors"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "bio": {
+      "type": "text"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "email": {
+      "type": "email"
+    },
+    "guardscan_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guardscan-article.guardscan-article",
+      "mappedBy": "author"
+    },
+    "yaicos_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::yaicos-article.yaicos-article",
+      "mappedBy": "author"
+    },
+    "amabex_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::amabex-article.amabex-article",
+      "mappedBy": "author"
+    }
+  }
+}

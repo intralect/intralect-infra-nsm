@@ -1,0 +1,252 @@
+networks:
+  mautic_network:
+    driver: bridge
+
+volumes:
+  traefik_data:
+  mautic_data_cron:
+  mautic_data_vendor:
+  mysql_data:
+  n8n_data:
+  mautic_data_media_files:
+  rabbitmq_data:
+  mautic_data_media_images:
+  mautic_data_plugins:
+  mautic_data_cache:
+  mautic_data_spool:
+  mautic_data_config:
+  mautic_data_logs:
+  postgres_data:
+
+services:
+  # ===========================================
+  # Traefik Reverse Proxy
+  # ===========================================
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - --api.dashboard=true
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.letsencrypt.acme.email=info@yaicos.com
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik_data:/letsencrypt
+    networks:
+      - mautic_network
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ===========================================
+  # MySQL (Mautic)
+  # ===========================================
+  mysql:
+    image: mysql:8.0
+    container_name: mautic-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: mautic
+      MYSQL_USER: mautic
+      MYSQL_PASSWORD: ${MAUTIC_DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password --innodb-buffer-pool-size=256M
+    networks:
+      - mautic_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ===========================================
+  # PostgreSQL with pgvector (Strapi + Semantic Search)
+  # ===========================================
+  postgres:
+    image: pgvector/pgvector:pg15
+    container_name: strapi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mautic_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ===========================================
+  # RabbitMQ (Mautic)
+  # ===========================================
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: mautic-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: mautic
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - mautic_network
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ===========================================
+  # Strapi CMS (V4 Supercharged)
+  # ===========================================
+  strapi:
+    image: node:20
+    container_name: strapi
+    restart: unless-stopped
+    working_dir: /srv/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      HOST: 0.0.0.0
+      PORT: 1337
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USERNAME: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_SSL: "false"
+      JWT_SECRET: ${STRAPI_JWT_SECRET}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      APP_KEYS: ${STRAPI_APP_KEYS}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      ENABLE_SEMANTIC_SEARCH: ${ENABLE_SEMANTIC_SEARCH:-false}
+    volumes:
+      - ./strapi:/srv/app
+    command: sh -c "npm install --legacy-peer-deps 2>/dev/null; npm run develop"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.strapi.rule=Host(`${STRAPI_URL}`)
+      - traefik.http.routers.strapi.tls=true
+      - traefik.http.routers.strapi.tls.certresolver=letsencrypt
+      - traefik.http.services.strapi.loadbalancer.server.port=1337
+    networks:
+      - mautic_network
+
+  # ===========================================
+  # Mautic Web
+  # ===========================================
+  mautic_web:
+    image: mautic/mautic:5-apache
+    container_name: mautic-web
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      - MAUTIC_DB_HOST=mysql
+      - MAUTIC_DB_USER=mautic
+      - MAUTIC_DB_PASSWORD=${MAUTIC_DB_PASSWORD}
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_MESSENGER_TRANSPORT_DSN=amqp://mautic:${RABBITMQ_PASSWORD}@rabbitmq:5672/%2f/messages
+      - DOCKER_MAUTIC_RUN_MIGRATIONS=true
+    volumes:
+      - mautic_data_config:/var/www/html/config
+      - mautic_data_logs:/var/www/html/var/logs
+      - mautic_data_media_files:/var/www/html/media/files
+      - mautic_data_media_images:/var/www/html/media/images
+      - mautic_data_plugins:/var/www/html/plugins
+      - mautic_data_vendor:/var/www/html/vendor
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mautic.rule=Host(`${MAUTIC_URL}`)
+      - traefik.http.routers.mautic.tls=true
+      - traefik.http.routers.mautic.tls.certresolver=letsencrypt
+      - traefik.http.services.mautic.loadbalancer.server.port=80
+    networks:
+      - mautic_network
+
+  # ===========================================
+  # Mautic Cron
+  # ===========================================
+  mautic_cron:
+    image: mautic/mautic:5-apache
+    container_name: mautic-cron
+    restart: unless-stopped
+    depends_on:
+      - mautic_web
+    environment:
+      - MAUTIC_DB_HOST=mysql
+      - MAUTIC_DB_USER=mautic
+      - MAUTIC_DB_PASSWORD=${MAUTIC_DB_PASSWORD}
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_MESSENGER_TRANSPORT_DSN=amqp://mautic:${RABBITMQ_PASSWORD}@rabbitmq:5672/%2f/messages
+    volumes:
+      - mautic_data_config:/var/www/html/config
+      - mautic_data_logs:/var/www/html/var/logs
+      - mautic_data_cron:/var/www/html/var/spool
+      - mautic_data_cache:/var/www/html/var/cache
+    command: sh -c "while true; do php /var/www/html/bin/console mautic:segments:update --quiet; php /var/www/html/bin/console mautic:campaigns:update --quiet; php /var/www/html/bin/console mautic:campaigns:trigger --quiet; sleep 60; done"
+    networks:
+      - mautic_network
+
+  # ===========================================
+  # n8n Workflow Automation
+  # ===========================================
+  n8n:
+    image: n8nio/n8n:2.3.0
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      - N8N_HOST=${N8N_URL}
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://${N8N_URL}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - N8N_PROXY_TRUST=true
+      - N8N_RUNNERS_ENABLED=true
+      - DB_TYPE=sqlite
+      - DB_SQLITE_POOL_SIZE=3
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - N8N_GIT_NODE_DISABLE_BARE_REPOS=true
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - GENERIC_TIMEZONE=${TZ}
+      - STRAPI_API_URL=https://${STRAPI_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    volumes:
+      - n8n_data:/home/node/.n8n
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.n8n.rule=Host(`${N8N_URL}`)
+      - traefik.http.routers.n8n.tls=true
+      - traefik.http.routers.n8n.tls.certresolver=letsencrypt
+      - traefik.http.services.n8n.loadbalancer.server.port=5678
+    networks:
+      - mautic_network

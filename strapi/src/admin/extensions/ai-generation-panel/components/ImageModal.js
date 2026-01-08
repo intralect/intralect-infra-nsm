@@ -1,0 +1,203 @@
+import React, { useState } from 'react';
+import {
+  ModalLayout,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from '@strapi/design-system/ModalLayout';
+import { Button } from '@strapi/design-system/Button';
+import { Box } from '@strapi/design-system/Box';
+import { Typography } from '@strapi/design-system/Typography';
+import { Stack } from '@strapi/design-system/Stack';
+import { TextInput } from '@strapi/design-system/TextInput';
+import { useNotification } from '@strapi/helper-plugin';
+import { Download, Link, Check } from '@strapi/icons';
+
+const ImageModal = ({ isOpen, onClose, imageUrl, prompt }) => {
+  const [copied, setCopied] = useState(false);
+  const toggleNotification = useNotification();
+
+  if (!isOpen) return null;
+
+  const handleDownload = async () => {
+    try {
+      // Use fetch with cors mode
+      const response = await fetch(imageUrl, {
+        mode: 'cors',
+        headers: {
+          'Accept': 'image/*'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Download failed');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `blog-image-${Date.now()}.png`;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+
+      toggleNotification({
+        type: 'success',
+        message: 'Image downloaded successfully!',
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+
+      // Fallback: Open in new tab if CORS fails
+      toggleNotification({
+        type: 'info',
+        message: 'Opening image in new tab - right-click to save',
+      });
+
+      setTimeout(() => {
+        window.open(imageUrl, '_blank');
+      }, 500);
+    }
+  };
+
+  const handleCopyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(imageUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+
+      toggleNotification({
+        type: 'success',
+        message: 'URL copied to clipboard!',
+      });
+    } catch (error) {
+      toggleNotification({
+        type: 'warning',
+        message: 'Failed to copy URL',
+      });
+    }
+  };
+
+  const handleOpenInNewTab = () => {
+    window.open(imageUrl, '_blank');
+  };
+
+  return (
+    <ModalLayout onClose={onClose} labelledBy="image-modal-title">
+      <ModalHeader>
+        <Typography fontWeight="bold" textColor="neutral800" as="h2" id="image-modal-title">
+          AI Generated Image
+        </Typography>
+      </ModalHeader>
+
+      <ModalBody>
+        <Stack spacing={4}>
+          {/* Image Preview */}
+          <Box
+            background="neutral100"
+            padding={2}
+            hasRadius
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '300px',
+            }}
+          >
+            <img
+              src={imageUrl}
+              alt="Generated blog image"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '400px',
+                borderRadius: '4px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              }}
+            />
+          </Box>
+
+          {/* Prompt Display */}
+          <Box>
+            <Typography variant="sigma" textColor="neutral600" marginBottom={2}>
+              Image Prompt Used
+            </Typography>
+            <Box
+              background="neutral100"
+              padding={3}
+              hasRadius
+              style={{
+                maxHeight: '120px',
+                overflowY: 'auto',
+              }}
+            >
+              <Typography variant="omega" textColor="neutral700">
+                {prompt}
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* URL Input */}
+          <Box>
+            <TextInput
+              label="Image URL"
+              name="imageUrl"
+              value={imageUrl}
+              readOnly
+              endAction={
+                <Button
+                  variant="ghost"
+                  onClick={handleCopyUrl}
+                  startIcon={copied ? <Check /> : <Link />}
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </Button>
+              }
+            />
+          </Box>
+
+          {/* Instructions */}
+          <Box background="primary100" padding={3} hasRadius>
+            <Typography variant="omega" textColor="primary700">
+              <strong>Next Steps:</strong>
+              <br />
+              1. Download the image using the button below
+              <br />
+              2. Go to Media Library in Strapi
+              <br />
+              3. Upload the downloaded image
+              <br />
+              4. Attach it as the featured image for this article
+            </Typography>
+          </Box>
+        </Stack>
+      </ModalBody>
+
+      <ModalFooter
+        startActions={
+          <Button onClick={onClose} variant="tertiary">
+            Close
+          </Button>
+        }
+        endActions={
+          <>
+            <Button onClick={handleOpenInNewTab} variant="secondary">
+              Open in New Tab
+            </Button>
+            <Button onClick={handleDownload} variant="success" startIcon={<Download />}>
+              Download Image
+            </Button>
+          </>
+        }
+      />
+    </ModalLayout>
+  );
+};
+
+export default ImageModal;
