@@ -28,5 +28,10 @@ module.exports = ({ env }) => ({
   // Scheduler plugin - Schedule publish/unpublish dates
   'scheduler': {
     enabled: true,
+    config: {
+      contentTypes: {
+        'api::yaicos-article.yaicos-article': {}
+      }
+    }
   },
 });
