@@ -24,11 +24,12 @@ const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isB
       let blob;
 
       if (isBase64) {
-        // Handle base64 images (Gemini format) - convert directly to blob
+        // Handle base64 data URL (Gemini format)
+        // imageUrl is like: data:image/png;base64,iVBORw0KG...
         const response = await fetch(imageUrl);
         blob = await response.blob();
       } else {
-        // Handle URL images (DALL-E 3 format) - fetch with CORS
+        // Handle external URL (DALL-E 3 format)
         const response = await fetch(imageUrl, {
           mode: 'cors',
           headers: {
@@ -43,19 +44,20 @@ const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isB
         blob = await response.blob();
       }
 
-      // Create download link
-      const url = window.URL.createObjectURL(blob);
+      // Create download link and trigger download
+      const downloadUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = url;
-      link.download = `blog-image-${Date.now()}.png`;
-      link.style.display = 'none';
+      link.href = downloadUrl;
+      link.download = `yaicos-blog-image-${Date.now()}.png`;
+
+      // Append to body, click, and remove
       document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
 
-      // Clean up
+      // Clean up object URL after a delay
       setTimeout(() => {
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
+        window.URL.revokeObjectURL(downloadUrl);
       }, 100);
 
       toggleNotification({
@@ -65,15 +67,31 @@ const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isB
     } catch (error) {
       console.error('Download error:', error);
 
-      // Fallback: Open in new tab
-      toggleNotification({
-        type: 'info',
-        message: 'Opening image in new tab - right-click to save',
-      });
+      // If download fails, try direct link approach
+      try {
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = `yaicos-blog-image-${Date.now()}.png`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
-      setTimeout(() => {
-        window.open(imageUrl, '_blank');
-      }, 500);
+        toggleNotification({
+          type: 'success',
+          message: 'Image download started!',
+        });
+      } catch (fallbackError) {
+        // Last resort: open in new tab
+        toggleNotification({
+          type: 'info',
+          message: 'Opening image in new tab - right-click to save',
+        });
+
+        setTimeout(() => {
+          window.open(imageUrl, '_blank');
+        }, 500);
+      }
     }
   };
 
