@@ -13,7 +13,7 @@ const AIGenerationPanel = () => {
   const { modifiedData, onChange, slug } = useCMEditViewDataManager();
   const [blogDraftModalOpen, setBlogDraftModalOpen] = useState(false);
   const [imageModalOpen, setImageModalOpen] = useState(false);
-  const [imageData, setImageData] = useState({ url: '', prompt: '' });
+  const [imageData, setImageData] = useState({ url: '', prompt: '', method: '', isBase64: false, fallback: false });
   const [draftLoading, setDraftLoading] = useState(false);
 
   // Only show for article content types
@@ -155,8 +155,25 @@ const AIGenerationPanel = () => {
               },
             }}
             onSuccess={(data) => {
+              // Handle both DALL-E 3 (imageUrl) and Gemini (imageBase64) formats
               if (data.imageUrl) {
-                setImageData({ url: data.imageUrl, prompt: data.prompt });
+                // DALL-E 3 format
+                setImageData({
+                  url: data.imageUrl,
+                  prompt: data.prompt,
+                  method: data.method,
+                  fallback: data.fallback
+                });
+                setImageModalOpen(true);
+              } else if (data.imageBase64) {
+                // Gemini format - convert base64 to data URL
+                const dataUrl = `data:${data.mimeType};base64,${data.imageBase64}`;
+                setImageData({
+                  url: dataUrl,
+                  prompt: data.prompt,
+                  method: data.method,
+                  isBase64: true
+                });
                 setImageModalOpen(true);
               }
             }}
@@ -184,6 +201,9 @@ const AIGenerationPanel = () => {
         onClose={() => setImageModalOpen(false)}
         imageUrl={imageData.url}
         prompt={imageData.prompt}
+        method={imageData.method}
+        isBase64={imageData.isBase64}
+        fallback={imageData.fallback}
       />
     </>
   );

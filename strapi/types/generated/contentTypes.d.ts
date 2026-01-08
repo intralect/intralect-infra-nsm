@@ -1041,7 +1041,11 @@ export interface ApiYaicosArticleYaicosArticle extends Schema.CollectionType {
         'estilo de vida',
         'transporte',
         'turismo',
-        'migracion'
+        'migracion',
+        'irlanda',
+        'malta',
+        'canada',
+        'dubai'
       ]
     >;
     meta_title: Attribute.String &
