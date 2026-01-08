@@ -91,13 +91,13 @@ Summary:`;
       'yaicos-article': {
         brandName: 'Yaicos',
         targetAudience: 'International students aged 18-30 seeking education and career opportunities',
-        visualStyle: 'friendly, welcoming, modern, educational, vibrant, aspirational',
-        colorPalette: 'bright blues (#2196F3), warm oranges (#FF9800), energetic yellows (#FFC107), white backgrounds',
+        visualStyle: 'PROFESSIONAL DOCUMENTARY PHOTOGRAPHY - friendly, welcoming, modern, educational, vibrant, aspirational',
+        colorPalette: 'bright blues (#2196F3), warm oranges (#FF9800), energetic yellows (#FFC107), natural daylight, white backgrounds',
         includeHumans: true,
-        humanRepresentation: 'diverse international students from Asian, African, European, Latin American, and Middle Eastern backgrounds, aged 18-30, shown from behind or at angles (no direct faces), engaged in learning activities, collaborative work, campus life',
+        humanRepresentation: 'REAL diverse international students from Asian, African, European, Latin American, and Middle Eastern backgrounds, aged 18-30, captured in authentic documentary photography style, shown from behind or at angles (no direct faces), engaged in learning activities, collaborative work, campus life, genuine candid moments',
         tone: 'friendly and aspirational',
-        additionalGuidelines: 'Images should feel welcoming and inspiring. Show diversity and international representation. Include students in realistic educational or campus settings. Focus on connection, learning, and opportunity. Similar to modern educational platforms like Coursera or Duolingo. Avoid stock photo poses - use natural, candid scenarios.',
-        avoidElements: 'text, logos, cluttered elements, stock photo poses'
+        additionalGuidelines: 'CRITICAL: Use PROFESSIONAL PHOTOGRAPHY ONLY - shot on Canon EOS R5 or Nikon Z9, documentary/photojournalism style. Images should feel welcoming and inspiring. Show diversity and international representation with REAL HUMANS in authentic educational or campus settings. Focus on connection, learning, and opportunity. Capture genuine candid moments like street photography or documentary style. Natural lighting, real environments, authentic expressions. STRICTLY AVOID: cartoon style, illustrations, 3D renders, CGI, animated look, artificial appearance. This must look like professional photography you would see in National Geographic or TIME Magazine education features.',
+        avoidElements: 'text, logos, cluttered elements, stock photo poses, cartoon style, illustrations, 3D renders, CGI, animated look, plastic appearance'
       },
 
       'amabex-article': {
@@ -222,10 +222,12 @@ MANDATORY REQUIREMENTS:
    Composition: ${composition}
    Tone: ${tone}
    Format: Wide landscape (1792x1024), perfect for blog header
-   Quality: Photorealistic, editorial-grade, magazine cover quality
-   Lighting: Professional studio lighting from upper left at 45°
-   Background: Clean gradient, not distracting from subject
-   Depth: 3D perspective with layered elements
+   Quality: PROFESSIONAL PHOTOGRAPHY - Real humans, real locations, editorial-grade
+   Photography Style: Shot on professional DSLR camera (Canon EOS R5, 35mm lens, f/2.8)
+   Lighting: Natural daylight with soft diffused lighting, golden hour warmth
+   Background: Real environment or subtle bokeh blur, authentic setting
+   People: REAL HUMANS in natural poses, genuine expressions, documentary style
+   ❌ STRICTLY AVOID: Cartoon style, illustrations, 3D renders, CGI, animated look, artificial/plastic appearance
 
 4. COMPOSITIONAL UNIFORMITY:
    - Central focal point at golden ratio
@@ -247,6 +249,11 @@ MANDATORY REQUIREMENTS:
    ❌ Company logos or brands
    ❌ Cliché imagery (handshakes, climbing arrows, lightbulbs)
    ❌ Cluttered or busy compositions
+   ❌ CARTOON STYLE - No cartoons, animations, illustrations, comic book style
+   ❌ 3D RENDERS - No CGI, 3D graphics, computer-generated imagery, artificial look
+   ❌ ILLUSTRATED ART - No drawn, painted, or illustrated style
+   ❌ ANIMATED APPEARANCE - No plastic/toy-like appearance, no unrealistic skin tones
+   ✅ ONLY REAL PHOTOGRAPHY - Professional DSLR photography of real humans and real environments
 ${humanSection}
 
 ${additionalGuidelines ? `\n8. ADDITIONAL BRAND GUIDELINES:\n${additionalGuidelines}\n` : ''}
@@ -254,11 +261,15 @@ ${additionalGuidelines ? `\n8. ADDITIONAL BRAND GUIDELINES:\n${additionalGuideli
 OUTPUT INSTRUCTIONS:
 Write a detailed 150-200 word DALL-E 3 prompt that:
 - Opens with the main concept directly related to "${title}"
-- Describes specific visual elements (not generic)
+- Describes PROFESSIONAL PHOTOGRAPHY scene with real humans in natural settings
+- Emphasizes DOCUMENTARY/PHOTOJOURNALISM style (NOT illustration or cartoon)
+- Specifies camera type, lens, lighting conditions (professional DSLR photography)
+- Describes authentic human subjects with genuine expressions and natural body language
 - Includes exact color codes and composition details
 - Appeals to ${targetAudience}
 - Maintains ${tone} tone
-- Ends with technical specifications
+- EXPLICITLY prohibits cartoon, illustration, 3D render, CGI, or animated styles
+- Ends with technical photography specifications
 
 DALL-E 3 Prompt:`;
 
@@ -270,8 +281,8 @@ DALL-E 3 Prompt:`;
       // Remove any markdown formatting
       imagePrompt = imagePrompt.replace(/```.*?\n|```/g, '').trim();
 
-      // Enforce uniformity suffix (same for ALL images)
-      const uniformitySuffix = ` | Professional blog header image | 1792x1024 wide landscape | Centered composition with 10% margins | ${colors} color scheme | Clean gradient background | Professional studio lighting from upper-left 45° | High-quality photorealistic render | Modern editorial style | Clean aesthetic | No text, logos, or faces`;
+      // Enforce uniformity suffix - PROFESSIONAL PHOTOGRAPHY ONLY
+      const uniformitySuffix = ` | Professional blog header photograph | 1792x1024 wide landscape format | Shot on Canon EOS R5, 35mm f/2.8 lens | Natural lighting, golden hour, soft shadows | ${colors} color palette | Real environment setting | Professional editorial photography | Documentary style with authentic humans | Genuine expressions, natural poses | High-resolution DSLR image quality | NO cartoon, illustration, 3D render, CGI, or animated style | NO text, logos, or direct face shots | Photojournalism aesthetic`;
 
       const finalPrompt = `${imagePrompt}${uniformitySuffix}`;
 
