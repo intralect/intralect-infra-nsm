@@ -9,6 +9,8 @@
 
 Added **Gemini 2.5 Flash Image** native image generation alongside existing DALL-E 3 support. Now you have **flexibility to choose** the best image generation method for each use case.
 
+⚠️ **IMPORTANT:** Gemini 2.5 Flash Image is currently **NOT available on the free tier**. The default has been set to **DALL-E 3** which works immediately. You can switch to Gemini when you upgrade to a paid Google AI plan.
+
 ---
 
 ## What Changed
@@ -277,27 +279,34 @@ const response = await fetch('/api/ai/generate-image', {
 | **Output Format** | Base64 (inline) | URL (download) |
 | **Integration** | Native (same API) | Separate API |
 | **Cost** | ~$0.01-0.02/image | ~$0.04/image |
+| **Free Tier** | ❌ Not available | ✅ Available with credits |
 | **Speed** | Faster (no download) | Slower (URL fetch) |
 | **Quality** | Excellent | Excellent |
 | **Image Size** | Flexible | 1024x1024, 1792x1024 |
-| **Setup** | GEMINI_API_KEY only | OPENAI_API_KEY required |
+| **Setup** | GEMINI_API_KEY + Paid plan | OPENAI_API_KEY ✅ |
+| **Status** | ⚠️ Requires paid plan | ✅ Works now |
 
 ---
 
 ## Recommendations
 
-### Use Gemini Native When:
+### Use DALL-E 3 (Current Default) ✅ RECOMMENDED
+- ✅ **Works immediately** with your current setup
+- ✅ No additional costs or upgrades needed
+- ✅ Excellent image quality
+- ✅ Proven reliability
+- ✅ Wide format support (1792x1024 perfect for blog headers)
+- ✅ Already integrated and tested
+
+### Use Gemini Native When (Future):
+- ⚠️ You upgrade to a **paid Google AI plan**
 - ✅ You want simplicity (single API)
 - ✅ You prefer Google's image style
-- ✅ You want faster processing
-- ✅ Cost optimization matters
+- ✅ You want faster processing (base64 inline)
+- ✅ Cost optimization matters (cheaper per image)
 - ✅ You're already using Gemini for content
 
-### Use DALL-E 3 When:
-- ✅ You specifically need OpenAI's art style
-- ✅ You have existing DALL-E 3 workflows
-- ✅ You want to compare results
-- ✅ Your brand guidelines specify DALL-E style
+**Current Status:** DALL-E 3 is the **default and recommended** method until Gemini Image becomes available on free tier or you upgrade.
 
 ---
 
@@ -335,11 +344,21 @@ curl -X POST http://localhost:1337/api/ai/generate-image \
 
 ## Troubleshooting
 
+### Error: "Quota exceeded for gemini-2.5-flash-preview-image" (429)
+- **Cause:** Gemini 2.5 Flash Image is **NOT available on the free tier**
+- **Solution:** Use DALL-E 3 (default) or upgrade to a paid Google AI plan
+- **How to use DALL-E 3:**
+  ```javascript
+  // Don't specify method, or explicitly set to dalle3
+  { method: 'dalle3' } // Works immediately!
+  ```
+
 ### Error: "Gemini not configured"
 - **Solution:** Add `GEMINI_API_KEY` to `.env`
 
 ### Error: "OpenAI not configured for DALL-E 3"
-- **Solution:** Add `OPENAI_API_KEY` to `.env` or switch to `method: "gemini"`
+- **Solution:** Add `OPENAI_API_KEY` to `.env`
+- **Current Status:** Already configured and working ✅
 
 ### Base64 Image Not Displaying
 - **Solution:** Ensure you're converting base64 to Blob correctly:
