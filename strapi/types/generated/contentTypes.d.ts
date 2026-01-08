@@ -1111,6 +1111,8 @@ export interface ApiYaicosArticleYaicosArticle extends Schema.CollectionType {
     no_index: Attribute.Boolean & Attribute.DefaultTo<false>;
     embedding: Attribute.JSON;
     ai_generated: Attribute.Boolean & Attribute.DefaultTo<false>;
+    publishAt: Attribute.DateTime;
+    unpublishAt: Attribute.DateTime;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

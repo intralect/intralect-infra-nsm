@@ -99,6 +99,12 @@
     "ai_generated": {
       "type": "boolean",
       "default": false
+    },
+    "publishAt": {
+      "type": "datetime"
+    },
+    "unpublishAt": {
+      "type": "datetime"
     }
   }
 }
