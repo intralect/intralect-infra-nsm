@@ -1,4 +1,5 @@
 module.exports = ({ env }) => ({
+  // Upload plugin - Image optimization
   upload: {
     config: {
       // Strapi keeps the original file and generates optimized versions
@@ -22,5 +23,10 @@ module.exports = ({ env }) => ({
       // Enable automatic WebP generation (much smaller files)
       generateWebP: true, // If this option exists in your Strapi version
     },
+  },
+
+  // Scheduler plugin - Schedule publish/unpublish dates
+  'scheduler': {
+    enabled: true,
   },
 });

@@ -16,6 +16,7 @@
     "@strapi/plugin-i18n": "4.25.0",
     "@strapi/plugin-users-permissions": "4.25.0",
     "@strapi/strapi": "4.25.0",
+    "@webbio/strapi-plugin-scheduler": "^1.1.0",
     "openai": "^4.20.0",
     "pg": "8.8.0",
     "pgvector": "^0.1.8",

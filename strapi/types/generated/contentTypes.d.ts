@@ -590,6 +590,45 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginSchedulerScheduler extends Schema.CollectionType {
+  collectionName: 'scheduler_scheduler';
+  info: {
+    collectionName: 'scheduler';
+    singularName: 'scheduler';
+    pluralName: 'scheduler';
+    displayName: 'scheduler';
+    description: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    uid: Attribute.String & Attribute.Required;
+    entryId: Attribute.BigInteger & Attribute.Required;
+    type: Attribute.Enumeration<['publish', 'archive']> & Attribute.Required;
+    datetime: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginI18NLocale extends Schema.CollectionType {
   collectionName: 'i18n_locale';
   info: {
@@ -1104,6 +1143,7 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::scheduler.scheduler': PluginSchedulerScheduler;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
