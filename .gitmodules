@@ -1,0 +1,3 @@
+[submodule "scripts/mautic-n8n-stack"]
+	path = scripts/mautic-n8n-stack
+	url = git@github.com:intralect/mautic-n8n-infra.git
