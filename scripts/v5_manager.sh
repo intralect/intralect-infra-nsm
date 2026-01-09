@@ -557,6 +557,7 @@ main() {
             12) [[ "$V5_DEPLOYED" == "true" ]] && view_logs ;;
             13) [[ "$V5_DEPLOYED" == "true" ]] && restart_services ;;
             14) [[ "$V5_DEPLOYED" == "true" ]] && view_documentation ;;
+            15) [[ "$V5_DEPLOYED" == "true" ]] && show_service_info ;;
 
             q|Q)
                 clear
