@@ -13,11 +13,23 @@ import { TextInput } from '@strapi/design-system/TextInput';
 import { useNotification } from '@strapi/helper-plugin';
 import { Download, Link, Check } from '@strapi/icons';
 
-const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isBase64 = false, fallback = false }) => {
+const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isBase64 = false, fallback = false, collectionType = 'yaicos-article' }) => {
   const [copied, setCopied] = useState(false);
   const toggleNotification = useNotification();
 
   if (!isOpen) return null;
+
+  // Determine brand prefix from collection type
+  const getBrandPrefix = () => {
+    const brandMap = {
+      'yaicos-article': 'yaicos',
+      'amabex-article': 'amabex',
+      'guardscan-article': 'guardscan'
+    };
+    return brandMap[collectionType] || 'yaicos';
+  };
+
+  const brandPrefix = getBrandPrefix();
 
   const handleDownload = async () => {
     try {
@@ -48,7 +60,7 @@ const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isB
       const downloadUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = downloadUrl;
-      link.download = `yaicos-blog-image-${Date.now()}.png`;
+      link.download = `${brandPrefix}-blog-image-${Date.now()}.png`;
 
       // Append to body, click, and remove
       document.body.appendChild(link);
@@ -71,7 +83,7 @@ const ImageModal = ({ isOpen, onClose, imageUrl, prompt, method = 'unknown', isB
       try {
         const link = document.createElement('a');
         link.href = imageUrl;
-        link.download = `yaicos-blog-image-${Date.now()}.png`;
+        link.download = `${brandPrefix}-blog-image-${Date.now()}.png`;
         link.target = '_blank';
         document.body.appendChild(link);
         link.click();

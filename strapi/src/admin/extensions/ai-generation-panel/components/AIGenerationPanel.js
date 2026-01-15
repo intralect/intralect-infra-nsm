@@ -4,10 +4,14 @@ import { Box } from '@strapi/design-system/Box';
 import { Typography } from '@strapi/design-system/Typography';
 import { Stack } from '@strapi/design-system/Stack';
 import { Divider } from '@strapi/design-system/Divider';
-import { Magic } from '@strapi/icons';
+import { Button } from '@strapi/design-system/Button';
+import { ToggleInput } from '@strapi/design-system/ToggleInput';
+import { Magic, Link, Cog } from '@strapi/icons';
 import AIButton from './AIButton';
 import BlogDraftModal from './BlogDraftModal';
 import ImageModal from './ImageModal';
+import LinkedInPublishModal from './LinkedInPublishModal';
+import LinkedInSettingsModal from './LinkedInSettingsModal';
 
 const AIGenerationPanel = () => {
   const { modifiedData, onChange, slug } = useCMEditViewDataManager();
@@ -15,6 +19,8 @@ const AIGenerationPanel = () => {
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [imageData, setImageData] = useState({ url: '', prompt: '', method: '', isBase64: false, fallback: false });
   const [draftLoading, setDraftLoading] = useState(false);
+  const [linkedInPublishModalOpen, setLinkedInPublishModalOpen] = useState(false);
+  const [linkedInSettingsModalOpen, setLinkedInSettingsModalOpen] = useState(false);
 
   // Only show for article content types
   const isArticleType = slug && (
@@ -36,7 +42,10 @@ const AIGenerationPanel = () => {
   };
 
   // Extract current field values
-  const { title, content, excerpt, meta_title, meta_description, category } = modifiedData || {};
+  const { title, content, excerpt, meta_title, meta_description, category, auto_publish_to_linkedin, id } = modifiedData || {};
+
+  // Check if this is an Amabex article (LinkedIn only for Amabex)
+  const isAmabexArticle = slug === 'api::amabex-article.amabex-article';
 
   // Handler to update form fields
   const updateField = (fieldName, value) => {
@@ -162,7 +171,8 @@ const AIGenerationPanel = () => {
                   url: data.imageUrl,
                   prompt: data.prompt,
                   method: data.method,
-                  fallback: data.fallback
+                  fallback: data.fallback,
+                  collectionType: getCollectionType()
                 });
                 setImageModalOpen(true);
               } else if (data.imageBase64) {
@@ -172,13 +182,63 @@ const AIGenerationPanel = () => {
                   url: dataUrl,
                   prompt: data.prompt,
                   method: data.method,
-                  isBase64: true
+                  isBase64: true,
+                  collectionType: getCollectionType()
                 });
                 setImageModalOpen(true);
               }
             }}
             disabled={!title}
           />
+
+          {/* LinkedIn Publishing (Amabex only) */}
+          {isAmabexArticle && (
+            <>
+              <Divider />
+
+              <Box>
+                <Stack spacing={2}>
+                  <Box paddingBottom={1}>
+                    <Typography variant="sigma" textColor="neutral600">
+                      <Link style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+                      LinkedIn Publishing
+                    </Typography>
+                  </Box>
+
+                  <ToggleInput
+                    label="Auto-publish to LinkedIn when scheduled"
+                    checked={auto_publish_to_linkedin || false}
+                    onChange={() => updateField('auto_publish_to_linkedin', !auto_publish_to_linkedin)}
+                    hint="Automatically post to LinkedIn when publishAt date is reached"
+                  />
+
+                  <Stack horizontal spacing={2}>
+                    <Button
+                      variant="secondary"
+                      startIcon={<Link />}
+                      onClick={() => setLinkedInPublishModalOpen(true)}
+                      disabled={!title || !id}
+                      fullWidth
+                    >
+                      Publish to LinkedIn
+                    </Button>
+
+                    <Button
+                      variant="tertiary"
+                      startIcon={<Cog />}
+                      onClick={() => setLinkedInSettingsModalOpen(true)}
+                    >
+                      Settings
+                    </Button>
+                  </Stack>
+
+                  <Typography variant="pi" textColor="neutral500">
+                    Generate AI-powered LinkedIn posts with professional tone and relevant emojis.
+                  </Typography>
+                </Stack>
+              </Box>
+            </>
+          )}
 
           <Box paddingTop={2}>
             <Typography variant="pi" textColor="neutral500">
@@ -204,7 +264,24 @@ const AIGenerationPanel = () => {
         method={imageData.method}
         isBase64={imageData.isBase64}
         fallback={imageData.fallback}
+        collectionType={imageData.collectionType}
       />
+
+      {isAmabexArticle && (
+        <>
+          <LinkedInPublishModal
+            isOpen={linkedInPublishModalOpen}
+            onClose={() => setLinkedInPublishModalOpen(false)}
+            article={modifiedData}
+            articleUrl={`https://ambaex.com/blog/${modifiedData?.slug || ''}`}
+          />
+
+          <LinkedInSettingsModal
+            isOpen={linkedInSettingsModalOpen}
+            onClose={() => setLinkedInSettingsModalOpen(false)}
+          />
+        </>
+      )}
     </>
   );
 };

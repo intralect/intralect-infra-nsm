@@ -30,6 +30,7 @@
     "featured_image": {
       "type": "media",
       "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -39,6 +40,8 @@
       "enum": [
         "products",
         "services",
+        "strategy",
+        "auditories",
         "business-solutions",
         "technology",
         "innovation",
@@ -79,6 +82,7 @@
     "og_image": {
       "type": "media",
       "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -103,6 +107,26 @@
       "type": "json"
     },
     "ai_generated": {
+      "type": "boolean",
+      "default": false
+    },
+    "publishAt": {
+      "type": "datetime"
+    },
+    "unpublishAt": {
+      "type": "datetime"
+    },
+    "linkedin_posted": {
+      "type": "boolean",
+      "default": false
+    },
+    "linkedin_post_id": {
+      "type": "string"
+    },
+    "linkedin_posted_at": {
+      "type": "datetime"
+    },
+    "auto_publish_to_linkedin": {
       "type": "boolean",
       "default": false
     }

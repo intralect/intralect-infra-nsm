@@ -30,7 +30,9 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       contentTypes: {
-        'api::yaicos-article.yaicos-article': {}
+        'api::yaicos-article.yaicos-article': {},
+        'api::amabex-article.amabex-article': {},
+        'api::guardscan-article.guardscan-article': {}
       }
     }
   },

@@ -852,6 +852,8 @@ export interface ApiAmabexArticleAmabexArticle extends Schema.CollectionType {
       [
         'products',
         'services',
+        'strategy',
+        'auditories',
         'business-solutions',
         'technology',
         'innovation',
@@ -896,6 +898,12 @@ export interface ApiAmabexArticleAmabexArticle extends Schema.CollectionType {
     no_index: Attribute.Boolean & Attribute.DefaultTo<false>;
     embedding: Attribute.JSON;
     ai_generated: Attribute.Boolean & Attribute.DefaultTo<false>;
+    publishAt: Attribute.DateTime;
+    unpublishAt: Attribute.DateTime;
+    linkedin_posted: Attribute.Boolean & Attribute.DefaultTo<false>;
+    linkedin_post_id: Attribute.String;
+    linkedin_posted_at: Attribute.DateTime;
+    auto_publish_to_linkedin: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1084,7 +1092,8 @@ export interface ApiYaicosArticleYaicosArticle extends Schema.CollectionType {
         'irlanda',
         'malta',
         'canada',
-        'dubai'
+        'dubai',
+        'suiza'
       ]
     >;
     meta_title: Attribute.String &
