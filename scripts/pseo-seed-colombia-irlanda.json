@@ -1,0 +1,137 @@
+{
+  "_meta": {
+    "description": "Seed data for Colombia→Ireland pSEO wedge. ALL data must be human-verified before import.",
+    "last_verified": "2026-04-20",
+    "verified_by": "Yaicos team",
+    "official_sources": [
+      "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "https://www.embajada-irlanda.com.co/",
+      "https://www.qualifax.ie/"
+    ]
+  },
+  "nationalities": [
+    {
+      "slug": "colombianos",
+      "display_name_es": "colombianos",
+      "display_name_en": "Colombians",
+      "country_code": "CO",
+      "visa_tier": "tier_2_required",
+      "consulate_locations": [
+        {
+          "city": "Bogotá",
+          "country": "Colombia",
+          "address": "Carrera 9 # 76-49, Oficina 1201",
+          "phone": "+57 (1) 317 7272"
+        }
+      ],
+      "common_docs_required": [
+        "Pasaporte vigente (mínimo 12 meses de validez)",
+        "Carta de aceptación de la escuela",
+        "Comprobante de pago de matrícula",
+        "Extracto bancario (últimos 3 meses, mínimo €3,000)",
+        "Carta de motivación (por qué estudiar en Irlanda)",
+        "Fotos carnet recientes",
+        "Formulario de visa online (AVATS)"
+      ],
+      "processing_time_days_avg": 30,
+      "notes": "Los colombianos necesitan visa de estudiante (Study Visa) para cursos de más de 90 días. Para cursos cortos de turismo (menos de 90 días) es posible entrar sin visa como turista, pero no se puede trabajar.",
+      "last_verified_date": "2026-04-20",
+      "official_source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/"
+    }
+  ],
+  "destinations": [
+    {
+      "slug": "irlanda",
+      "display_name_es": "Irlanda",
+      "country_code": "IE",
+      "primary_language": "ingles",
+      "currency": "EUR",
+      "cost_of_living_monthly_eur": 1400,
+      "work_rights_default": "part_time_20h",
+      "capital_city": "Dublín",
+      "featured_cities": ["Dublín", "Cork", "Galway", "Limerick"],
+      "last_verified_date": "2026-04-20"
+    }
+  ],
+  "visa_matrix": [
+    {
+      "_nationality_slug": "colombianos",
+      "_destination_slug": "irlanda",
+      "visa_required": true,
+      "visa_type_name": "Study Visa (Stamp 2)",
+      "max_course_duration_weeks": 52,
+      "work_rights_during_study": "part_time_20h",
+      "work_rights_after_study": "short_stay_allowed",
+      "total_estimated_cost_eur": 8500,
+      "visa_cost_eur": 60,
+      "official_source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "application_steps": [
+        { "step": 1, "description": "Elige y paga tu curso en una escuela acreditada por Quality and Qualifications Ireland (QQI)." },
+        { "step": 2, "description": "Obtén tu carta de aceptación oficial de la escuela." },
+        { "step": 3, "description": "Crea tu cuenta en el sistema AVATS (Automated Visa Application Tracking System) del gobierno irlandés." },
+        { "step": 4, "description": "Completa el formulario online y paga la tasa de €60." },
+        { "step": 5, "description": "Reúne todos los documentos requeridos y preséntate en el consulado o envíalos por correo certificado." },
+        { "step": 6, "description": "Espera la resolución (promedio 30 días hábiles). Puedes rastrear tu solicitud en AVATS." },
+        { "step": 7, "description": "Con visa aprobada, al llegar a Irlanda registra tu IRP (Irish Residence Permit) dentro de los 90 días." }
+      ],
+      "typical_processing_weeks": 6,
+      "notes": "Irlanda es el único país de habla inglesa en la Unión Europea. El Stamp 2 permite trabajar 20h/semana durante el año lectivo y 40h/semana en vacaciones (junio-septiembre y diciembre-enero).",
+      "last_verified_date": "2026-04-20"
+    }
+  ],
+  "pseo_pages": [
+    {
+      "_note": "Manually created seed page — intro_prose and faq_prose are human-written for Phase 3 launch",
+      "slug": "estudiar-ingles-en-irlanda/para-colombianos",
+      "page_type": "overview",
+      "_nationality_slug": "colombianos",
+      "_destination_slug": "irlanda",
+      "h1": "Estudiar inglés en Irlanda siendo colombiano: guía completa 2026",
+      "meta_title": "Estudiar inglés en Irlanda para colombianos 2026",
+      "meta_description": "Guía completa para colombianos que quieren estudiar inglés en Irlanda: visa, costos, escuelas recomendadas y cómo trabajar mientras estudias.",
+      "generated_by": "manual",
+      "generation_date": "2026-04-20",
+      "intro_prose": "<p>Irlanda es uno de los destinos más elegidos por colombianos que quieren mejorar su inglés y ganar experiencia internacional. Su ambiente multicultural, la posibilidad de trabajar mientras estudias y su cercanía cultural con Latinoamérica lo hacen especialmente atractivo.</p><p>En esta guía encontrarás todo lo que necesitas saber: desde los requisitos de visa hasta las mejores escuelas en Dublín, Cork y Galway, con información verificada por el equipo de Yaicos.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Los colombianos necesitan visa para estudiar inglés en Irlanda?",
+          "answer": "Sí, los colombianos necesitan visa de estudiante (Study Visa - Stamp 2) para cursos de más de 90 días. Para cursos cortos de turismo menores a 90 días es posible entrar sin visa, pero no se puede trabajar. El proceso de solicitud se hace online a través del sistema AVATS del gobierno irlandés y tarda en promedio 30 días hábiles."
+        },
+        {
+          "question": "¿Cuánto cuesta estudiar inglés en Irlanda para un colombiano?",
+          "answer": "El costo total depende de la duración y el tipo de curso. Un curso de 6 meses en Dublín incluyendo matrícula, alojamiento en homestay y gastos personales básicos está entre €6,000 y €10,000. Los cursos de inglés general suelen costar entre €150-€350 por semana dependiendo de la escuela. Yaicos te puede ayudar a comparar opciones y encontrar la mejor relación precio-calidad para tu presupuesto."
+        },
+        {
+          "question": "¿Puedo trabajar mientras estudio inglés en Irlanda?",
+          "answer": "Sí, con visa de estudiante Stamp 2 puedes trabajar legalmente hasta 20 horas por semana durante el período lectivo y hasta 40 horas por semana en vacaciones de verano (junio a septiembre) y en diciembre y enero. Muchos estudiantes colombianos trabajan en hostelería, comercio o servicios, lo que les ayuda a cubrir parte de sus gastos y a mejorar su inglés en un entorno laboral real."
+        },
+        {
+          "question": "¿Cuál es la mejor ciudad en Irlanda para estudiar inglés?",
+          "answer": "Dublín es la opción más popular por su oferta de trabajo y variedad de escuelas acreditadas. Cork es más tranquila y económica, con una gran comunidad latinoamericana. Galway destaca por su vida cultural y ambiente universitario. La elección depende de tu presupuesto y objetivos: si buscas más trabajo y networking, Dublín; si prefieres un ritmo más tranquilo y mejor calidad de vida por menos dinero, Cork o Galway."
+        },
+        {
+          "question": "¿Qué documentos necesito para la visa de estudiante irlandesa siendo colombiano?",
+          "answer": "Los documentos principales son: pasaporte vigente con al menos 12 meses de validez, carta de aceptación oficial de la escuela, comprobante de pago de la matrícula, extracto bancario de los últimos 3 meses mostrando fondos suficientes (mínimo €3,000 recomendados), carta de motivación explicando por qué quieres estudiar en Irlanda, y fotos recientes. El proceso se hace online en el sistema AVATS y la tasa de visa es de €60."
+        },
+        {
+          "question": "¿Cuánto tiempo tarda el proceso de visa de estudiante para Irlanda?",
+          "answer": "El tiempo promedio de procesamiento es de 4-6 semanas (30 días hábiles). Sin embargo, se recomienda solicitar con al menos 8 semanas de anticipación para tener margen en caso de que se requiera documentación adicional. El consulado irlandés en Bogotá tramita las solicitudes de colombianos."
+        },
+        {
+          "question": "¿Qué escuelas de inglés en Irlanda son las mejores para colombianos?",
+          "answer": "Irlanda tiene más de 100 escuelas de inglés acreditadas por Quality and Qualifications Ireland (QQI), el organismo oficial de calidad educativa. Entre las más recomendadas por Yaicos para estudiantes colombianos están EC Dublin, Atlas Language School, Delfin English School y Emerald Cultural Institute, todas con buena infraestructura para latinoamericanos. Yaicos tiene convenios con varias de ellas que permiten acceder a precios preferenciales."
+        },
+        {
+          "question": "¿Puedo quedarme en Irlanda después de terminar mi curso?",
+          "answer": "Con una visa de estudiante Stamp 2, tienes derecho a permanecer en Irlanda hasta que expire tu visa (que coincide con la duración de tu curso más 30 días). Para quedarte más tiempo necesitarías otra visa o permiso. Algunos estudiantes optan por extender su estadía estudiando un curso adicional o explorando otras vías migratorias. El equipo de Yaicos puede orientarte sobre las opciones disponibles según tu situación."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "colombianos",
+        "destination": "Irlanda",
+        "duration": null,
+        "visa_type": "Stamp 2"
+      }
+    }
+  ]
+}

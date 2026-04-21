@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "description": "Seed data for Argentina→Ireland pSEO wedge. ALL data must be human-verified before import.",
+    "last_verified": "2026-04-21",
+    "verified_by": "PENDIENTE — validar por equipo Yaicos",
+    "official_sources": [
+      "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "https://www.irishimmigration.ie/registering-your-immigration-permission/",
+      "https://www.qualifax.ie/"
+    ],
+    "_validation_notes": [
+      "VALIDAR: fondos mínimos requeridos al ingresar (aquí omitido — confirmar cifra oficial actual)",
+      "VALIDAR: semanas mínimas de curso para obtener derechos laborales",
+      "VALIDAR: si hay embajada/consulado irlandés en Argentina para casos de apelación",
+      "VALIDAR: proceso exacto IRP al llegar (plazo, costo, documentos requeridos)",
+      "VALIDAR: horario trabajo — 20h/semana clases, 40h vacaciones (igual que Colombia?)"
+    ]
+  },
+  "nationalities": [
+    {
+      "slug": "argentinos",
+      "display_name_es": "argentinos",
+      "display_name_en": "Argentinians",
+      "country_code": "AR",
+      "visa_tier": "tier_1_waiver",
+      "consulate_locations": [],
+      "common_docs_required": [
+        "Pasaporte vigente (mínimo 12 meses de validez)",
+        "Carta de aceptación de la escuela (acreditada por QQI)",
+        "Comprobante de pago de matrícula",
+        "Extracto bancario (últimos 3 meses — VALIDAR monto mínimo recomendado)",
+        "Seguro médico de viaje válido para Irlanda",
+        "Comprobante de alojamiento para primeras noches"
+      ],
+      "processing_time_days_avg": 0,
+      "notes": "Los argentinos NO necesitan visa previa para estudiar inglés en Irlanda. Ingresan como turistas y al llegar solicitan el Student Permission (Stamp 2) ante el oficial de migración. Deben demostrar fondos suficientes, carta de aceptación de la escuela y seguro médico. Para cursos de más de 90 días deben registrar su IRP dentro de los 90 días de llegada.",
+      "last_verified_date": "2026-04-21",
+      "official_source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/"
+    }
+  ],
+  "destinations": [
+    {
+      "_note": "Si ya existe 'irlanda' de seed Colombia, no duplicar — saltar este bloque en Strapi admin",
+      "slug": "irlanda",
+      "display_name_es": "Irlanda",
+      "country_code": "IE",
+      "primary_language": "ingles",
+      "currency": "EUR",
+      "cost_of_living_monthly_eur": 1400,
+      "work_rights_default": "part_time_20h",
+      "capital_city": "Dublín",
+      "featured_cities": ["Dublín", "Cork", "Galway", "Limerick"],
+      "last_verified_date": "2026-04-20"
+    }
+  ],
+  "visa_matrix": [
+    {
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "irlanda",
+      "visa_required": false,
+      "visa_type_name": "Student Permission (Stamp 2) — sin visa previa",
+      "max_course_duration_weeks": 52,
+      "work_rights_during_study": "part_time_20h",
+      "work_rights_after_study": "short_stay_allowed",
+      "total_estimated_cost_eur": 9500,
+      "visa_cost_eur": 0,
+      "official_source_url": "https://www.irishimmigration.ie/coming-to-study-in-ireland/",
+      "application_steps": [
+        { "step": 1, "description": "Elegí y pagá tu curso en una escuela acreditada por Quality and Qualifications Ireland (QQI). Necesitás el comprobante para mostrar en migración." },
+        { "step": 2, "description": "Obtené tu carta de aceptación oficial de la escuela — es el documento más importante para el ingreso." },
+        { "step": 3, "description": "Asegurate de tener fondos suficientes en tu cuenta bancaria. El oficial de migración puede pedirte comprobante (VALIDAR monto mínimo actual)." },
+        { "step": 4, "description": "Contratá un seguro médico de viaje válido para Irlanda por la duración de tu estadía." },
+        { "step": 5, "description": "Al llegar al aeropuerto en Irlanda, el oficial de migración te otorga el Student Permission (Stamp 2). Mostrá tu carta de aceptación, fondos y seguro." },
+        { "step": 6, "description": "Dentro de los 90 días de llegada, registrá tu IRP (Irish Residence Permit) en la oficina de inmigración. VALIDAR: costo y documentos exactos del IRP." }
+      ],
+      "typical_processing_weeks": 0,
+      "notes": "Argentina tiene visa waiver con Irlanda — no hay trámite consular previo. El permiso se otorga al llegar. VALIDAR: semanas mínimas de curso para derechos laborales. Con derechos laborales: 20h/semana durante clases, 40h/semana en vacaciones.",
+      "last_verified_date": "2026-04-21"
+    }
+  ],
+  "pseo_pages": [
+    {
+      "_note": "Seed page — intro_prose y faq_prose son borradores, requieren revisión humana antes de publicar",
+      "slug": "estudiar-ingles-en-irlanda/para-argentinos",
+      "page_type": "overview",
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "irlanda",
+      "h1": "Estudiar inglés en Irlanda siendo argentino: guía completa 2026",
+      "meta_title": "Estudiar inglés en Irlanda para argentinos 2026",
+      "meta_description": "Guía para argentinos que quieren estudiar inglés en Irlanda: sin visa previa, costos reales, escuelas recomendadas y cómo trabajar mientras estudias.",
+      "generated_by": "manual",
+      "generation_date": "2026-04-21",
+      "intro_prose": "<p>Irlanda es uno de los destinos más elegidos por argentinos que quieren mejorar su inglés y ganar experiencia internacional. Una de las grandes ventajas para los argentinos es que <strong>no necesitan tramitar una visa antes de viajar</strong> — el permiso de estudiante se obtiene directamente al llegar al aeropuerto.</p><p>En esta guía encontrarás todo lo que necesitás saber: desde los requisitos de ingreso hasta las mejores escuelas en Dublín, Cork y Galway, con información verificada por el equipo de Yaicos.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Los argentinos necesitan visa para estudiar inglés en Irlanda?",
+          "answer": "No, los argentinos no necesitan tramitar una visa antes de viajar. Argentina tiene acuerdo de visa waiver con Irlanda, lo que significa que podés ingresar y al llegar el oficial de migración te otorga el Student Permission (Stamp 2) directamente. Solo necesitás tu carta de aceptación de la escuela, fondos suficientes y seguro médico."
+        },
+        {
+          "question": "¿Qué es el Student Permission y cómo se obtiene?",
+          "answer": "El Student Permission (Stamp 2) es el permiso que te autoriza a estudiar y trabajar legalmente en Irlanda. Para los argentinos se obtiene al llegar al aeropuerto: el oficial de migración lo estampa en tu pasaporte cuando mostrás la carta de aceptación de tu escuela y comprobás que tenés fondos suficientes. Dentro de los 90 días de llegada debés registrar tu IRP (Irish Residence Permit) en la oficina de inmigración local."
+        },
+        {
+          "question": "¿Cuánto cuesta estudiar inglés en Irlanda para un argentino?",
+          "answer": "El costo total depende de la duración y el tipo de curso. Un programa de 6 meses en Dublín incluyendo matrícula, alojamiento y gastos personales básicos puede estar entre €7,000 y €11,000. Los cursos de inglés general suelen costar entre €150-€350 por semana según la escuela. A diferencia de colombianos, los argentinos no pagan tasa de visa, lo que reduce levemente el costo inicial. Yaicos puede ayudarte a armar un presupuesto ajustado a tu situación."
+        },
+        {
+          "question": "¿Puedo trabajar mientras estudio inglés en Irlanda siendo argentino?",
+          "answer": "Sí, con Student Permission (Stamp 2) podés trabajar legalmente hasta 20 horas por semana durante el período lectivo y hasta 40 horas por semana en vacaciones. Para tener derechos laborales, el curso debe cumplir con los requisitos mínimos de duración (VALIDAR antes de publicar este dato). Muchos argentinos trabajan en hostelería, comercio o servicios, lo que ayuda a cubrir gastos y practicar el inglés en un entorno laboral real."
+        },
+        {
+          "question": "¿Qué documentos necesito para entrar a Irlanda a estudiar siendo argentino?",
+          "answer": "Los documentos clave son: pasaporte vigente con al menos 12 meses de validez, carta de aceptación oficial de tu escuela (acreditada por QQI), comprobante de fondos suficientes en tu cuenta bancaria, seguro médico de viaje válido para Irlanda, y comprobante de alojamiento para las primeras noches. No hay formulario de visa online previo — todo se resuelve al llegar al aeropuerto."
+        },
+        {
+          "question": "¿Cuánto dinero necesito tener para entrar a Irlanda a estudiar?",
+          "answer": "VALIDAR ANTES DE PUBLICAR — Este dato debe confirmarse con fuentes oficiales actualizadas. El oficial de migración tiene discrecionalidad y puede pedir comprobante de fondos. Yaicos puede orientarte sobre el monto actualmente recomendado para evitar inconvenientes al ingresar."
+        },
+        {
+          "question": "¿Cuál es la mejor ciudad en Irlanda para estudiar inglés?",
+          "answer": "Dublín es la más popular por su oferta laboral y variedad de escuelas acreditadas. Cork es más tranquila, económica y con gran comunidad latinoamericana. Galway destaca por su ambiente cultural y universitario. La elección depende de tu presupuesto y objetivos: si buscás más trabajo y networking, Dublín; si preferís mejor calidad de vida por menos dinero, Cork o Galway."
+        },
+        {
+          "question": "¿Qué escuelas de inglés en Irlanda recomienda Yaicos para argentinos?",
+          "answer": "Irlanda tiene más de 100 escuelas de inglés acreditadas por Quality and Qualifications Ireland (QQI). Entre las más recomendadas por Yaicos para estudiantes argentinos están EC Dublin, Atlas Language School, Delfin English School y Emerald Cultural Institute, todas con experiencia con estudiantes latinoamericanos. Yaicos tiene acuerdos con varias de ellas para acceder a precios y condiciones especiales."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "argentinos",
+        "destination": "Irlanda",
+        "duration": null,
+        "visa_type": "Student Permission Stamp 2"
+      }
+    }
+  ]
+}

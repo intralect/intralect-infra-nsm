@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "description": "Atlas Language School Dublin — seed for Strapi yaicos-school. Verify before publish.",
+    "source": "https://atlaslanguageschool.com/atlas-dublin/",
+    "last_verified": "2026-04-21"
+  },
+  "data": {
+    "name": "Atlas Language School Dublin",
+    "slug": "atlas-language-school-dublin",
+    "city": "Dublin",
+    "country": "Ireland",
+    "country_code": "IE",
+    "school_type": "language_school",
+    "school_size": "large",
+    "address": "Portobello House, 34A South Richmond Street, Dublin 2",
+    "latitude": 53.33483,
+    "longitude": -6.26302,
+    "website_url": "https://atlaslanguageschool.com/atlas-dublin/",
+    "max_class_size": 15,
+    "average_student_age": 27,
+    "nationalities_count": 40,
+    "nationality_mix": [
+      { "country": "Mexico", "percentage": 19 },
+      { "country": "Taiwan", "percentage": 13 },
+      { "country": "Brazil", "percentage": 11 },
+      { "country": "South Korea", "percentage": 10 }
+    ],
+    "accreditations": ["EAQUALS", "QQI/ACELS", "Cambridge Assessment English", "Trinity College London", "IALC", "MEI"],
+    "amenities": [
+      "WiFi en todo el edificio",
+      "Cafetería y restaurante para estudiantes",
+      "Sala de estudio",
+      "Sala de meditación",
+      "Laboratorio informático",
+      "Biblioteca"
+    ],
+    "key_features": [
+      "Máximo 15 alumnos por clase",
+      "Pizarras interactivas en todas las aulas",
+      "Cuerpo estudiantil de más de 40 nacionalidades",
+      "Programa social y cultural diario",
+      "Múltiples centros de exámenes oficiales",
+      "Opciones de residencia propia"
+    ],
+    "language_levels_offered": ["A1", "A2", "B1", "B2", "C1"],
+    "exams_offered": ["IELTS", "Cambridge FCE", "Cambridge CAE", "TOEIC", "Trinity"],
+    "social_activities_offered": [
+      "Quiz nights y language exchanges",
+      "Excursiones culturales (Book of Kells, castillos)",
+      "Senderismo: Howth, Bray, Glendalough",
+      "Viajes de fin de semana: Galway, Cliffs of Moher",
+      "Trips a Belfast y Giant's Causeway",
+      "Fiestas temáticas: Halloween, Navidad"
+    ],
+    "description": "Atlas Language School es una de las escuelas de idiomas más grandes de Irlanda, ubicada en la histórica Portobello House a orillas del Grand Canal. Con 25 aulas modernas y más de 20 años de experiencia, combina excelencia académica con un programa social activo y comunidad internacional diversa.",
+    "verdict_text": "Ideal para estudiantes que buscan una escuela grande, bien acreditada y con vida social activa. Su ubicación fuera del centro hace que los alquileres cercanos sean algo más económicos que en el corazón de Dublín.",
+    "best_for": "Estudiantes que buscan comunidad internacional diversa y programa social activo",
+    "pros": [
+      "Máximo 15 alumnos por clase",
+      "Acreditación EAQUALS — el estándar más exigente",
+      "40+ nacionalidades — buena mezcla, sin dominio de un solo país",
+      "Programa social diario incluido",
+      "Residencias propias disponibles"
+    ],
+    "cons": [
+      "10 minutos a pie del centro — no céntrico",
+      "Tamaño grande puede sentirse impersonal",
+      "Zona de Portobello más tranquila, menos opciones de trabajo cerca"
+    ],
+    "score_location": 7.5,
+    "score_teachers": 8.5,
+    "score_facilities": 9.0,
+    "score_value": 8.0,
+    "score_social": 9.0,
+    "score_latam_support": 8.0,
+    "advisor_name": "Equipo Yaicos",
+    "last_reviewed_date": "2026-04-21",
+    "is_featured": true,
+    "commission_tier": "standard",
+    "meta_title": "Atlas Language School Dublin | Yaicos",
+    "meta_description": "Atlas Language School Dublin: clases de inglés con máximo 15 alumnos, acreditación EAQUALS y programa social diario. Ideal para latinoamericanos.",
+    "faq_items": [
+      {
+        "question": "¿Qué acreditaciones tiene Atlas Dublin?",
+        "answer": "EAQUALS, QQI/ACELS, Cambridge, Trinity, IALC y MEI — entre las acreditaciones más reconocidas del sector."
+      },
+      {
+        "question": "¿Cuántos alumnos hay por clase?",
+        "answer": "Máximo 15 estudiantes por clase."
+      },
+      {
+        "question": "¿Qué nacionalidades estudian en Atlas?",
+        "answer": "Más de 40 nacionalidades. Las más representadas son México (19%), Taiwan (13%), Brasil (11%) y Corea del Sur (10%). Ninguna supera el 20% — buena mezcla."
+      }
+    ]
+  }
+}
