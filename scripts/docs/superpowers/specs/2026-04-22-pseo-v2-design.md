@@ -14,52 +14,53 @@ Phase 1 built `/estudiar-ingles-en-irlanda/para-colombianos` (destination-first)
 
 ## URL Architecture
 
+**Destination-first** (matches existing frontend route parser — no code changes needed).
+
 ```
-/{cc}/estudiar-en-{destination}/                    hub page
-/{cc}/estudiar-en-{destination}/4-semanas           duration page
-/{cc}/estudiar-en-{destination}/8-semanas
-/{cc}/estudiar-en-{destination}/12-semanas
-/{cc}/estudiar-en-{destination}/6-meses
-/{cc}/estudiar-en-{destination}/desde-{ciudad}      city page (phase 2)
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}            hub page
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}/4-semanas  duration page
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}/8-semanas
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}/12-semanas
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}/6-meses
+/estudiar-{idioma}-en-{destino}/para-{nacionalidad}/desde-{ciudad}  city page (phase 2)
 ```
 
 ### Examples
 
 ```
-/co/estudiar-en-irlanda/
-/co/estudiar-en-irlanda/4-semanas
-/co/estudiar-en-irlanda/8-semanas
-/co/estudiar-en-irlanda/12-semanas
-/co/estudiar-en-irlanda/6-meses
+/estudiar-ingles-en-irlanda/para-colombianos
+/estudiar-ingles-en-irlanda/para-colombianos/4-semanas
+/estudiar-ingles-en-irlanda/para-colombianos/8-semanas
+/estudiar-ingles-en-irlanda/para-colombianos/12-semanas
+/estudiar-ingles-en-irlanda/para-colombianos/6-meses
 
-/mx/estudiar-en-canada/
-/mx/estudiar-en-canada/4-semanas
-/mx/estudiar-en-canada/8-semanas
-/mx/estudiar-en-canada/12-semanas
-/mx/estudiar-en-canada/6-meses
-/mx/estudiar-en-canada/desde-monterrey      (phase 2)
+/estudiar-ingles-en-canada/para-mexicanos
+/estudiar-ingles-en-canada/para-mexicanos/4-semanas
+/estudiar-ingles-en-canada/para-mexicanos/desde-monterrey      (phase 2)
 
-/cl/estudiar-en-canada/
-/cl/estudiar-en-canada/4-semanas
-/cl/estudiar-en-canada/desde-santiago       (phase 2)
+/estudiar-ingles-en-canada/para-chilenos
+/estudiar-ingles-en-canada/para-chilenos/4-semanas
+/estudiar-ingles-en-canada/para-chilenos/desde-santiago        (phase 2)
 
-/ar/estudiar-en-irlanda/
-/pe/estudiar-en-canada/                     (future — stub hub /pe needed first)
+/estudiar-ingles-en-irlanda/para-argentinos
+/estudiar-ingles-en-canada/para-peruanos                       (future)
 ```
 
 ### URL Rules
 
-- `{cc}` = ISO 2-letter country code matching existing hub routes
-- `{destination}` = lowercase, hyphenated country name (canada, irlanda, reino-unido, malta, dubai)
-- `{ciudad}` = lowercase city slug (ciudad-de-mexico, monterrey, santiago, buenos-aires, bogota)
-- City pages are phase 2 — only add when search data confirms volume or client data confirms origin city
+- `{idioma}` = ingles | frances (lowercase)
+- `{destino}` = canada | irlanda | reino-unido | malta | dubai (lowercase, hyphenated)
+- `{nacionalidad}` = colombianos | mexicanos | chilenos | argentinos | peruanos (plural, lowercase)
+- `{ciudad}` = monterrey | santiago | buenos-aires | bogota (lowercase, hyphenated)
+- City pages are phase 2 — only add when search data confirms volume
 
-### New Countries Without Hubs
+### Authority from Country Hubs
 
-For countries not yet in the site (`/pe`, `/ve`, `/ec`):
-1. Create lightweight stub hub first (`/pe` — one page, minimal content, internal links to pSEO)
-2. Then add pSEO pages under it immediately
-3. Stub hub grows into real hub as content accumulates
+Each existing hub (`/co`, `/mx`, `/cl`, `/ar`) links to its pSEO hub page via `CountryHubInternalLinks`. Internal links pass authority — no URL nesting required. Hub → pSEO link is already implemented.
+
+### New Nationalities Without Hub Pages
+
+Just add new pSEO pages with `para-peruanos` etc. No stub hub needed — internal links from existing hubs can cross-reference. Add a hub when content volume justifies it.
 
 ---
 
@@ -139,28 +140,36 @@ City-specific content blocks:
 
 ## Architecture Changes from v1
 
-### 1. Frontend Route Change
+### 1. Frontend Route — NO CHANGE NEEDED
+
+Loveable agent already implemented destination-first routing:
+```
+Route: /:idiomaDestino/:paraNacionalidad
+Route: /:idiomaDestino/:paraNacionalidad/:extra
+Guard: idiomaDestino must match estudiar-{idioma}-en-{destino}
+       paraNacionalidad must start with para-
+```
+This handles all pSEO URLs correctly. No frontend route changes required.
+
+### 2. Strapi pSEO Page Slug Format (unchanged from v1)
 
 ```
-OLD: /estudiar-:idioma-en-:destino/para-:nacionalidad/:duracion?
-NEW: /:cc/estudiar-en-:destino/:segment?
+estudiar-ingles-en-irlanda/para-colombianos
+estudiar-ingles-en-irlanda/para-colombianos/4-semanas
+estudiar-ingles-en-canada/para-mexicanos
 ```
 
-Where `:segment` matches `4-semanas | 8-semanas | 12-semanas | 6-meses | desde-:ciudad`.
+Slug = full path minus leading slash. Frontend fetches by slug via `fetchPseoPageBySlug`.
 
-Router must handle both hub (no segment) and sub-pages (with segment) via same dynamic component or separate components.
+### 3. CountryHubInternalLinks — DONE
 
-### 2. Strapi pSEO Page Slug Format
+Added pSEO hub links to all 4 hubs:
+- `/mx` → `/estudiar-ingles-en-canada/para-mexicanos`
+- `/co` → `/estudiar-ingles-en-irlanda/para-colombianos`
+- `/cl` → `/estudiar-ingles-en-canada/para-chilenos`
+- `/ar` → `/estudiar-ingles-en-irlanda/para-argentinos`
 
-```
-OLD: estudiar-ingles-en-irlanda/para-colombianos
-NEW: co/estudiar-en-irlanda
-NEW: co/estudiar-en-irlanda/4-semanas
-```
-
-Slug becomes the full path (minus leading slash). Frontend fetches by slug.
-
-### 3. Duration as Separate Strapi Records
+### 4. Duration as Separate Strapi Records
 
 Each duration page = separate Strapi record. Not a sub-field on the hub record. Reason: different content, different SEO metadata, different structured data. Hub and duration records share a `parent_hub` relation field.
 
