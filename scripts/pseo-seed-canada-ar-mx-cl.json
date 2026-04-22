@@ -1,0 +1,777 @@
+{
+  "_meta": {
+    "description": "Seed data for Argentina/Mexico/Chile → Canada pSEO wedge. ALL factual data manually verified before import.",
+    "last_verified": "2026-04-22",
+    "verified_by": "Yaicos team",
+    "official_sources": [
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html",
+      "https://www.canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/study-permit-tool.html",
+      "https://www.ircc.canada.ca"
+    ],
+    "import_order": ["nationalities", "destinations", "visa_matrix", "pseo_pages"],
+    "note_on_study_permit": "Courses of 6 months or less do NOT require a study permit in Canada. Students enter as visitors with an eTA. This applies to all 3 nationalities below. Source: IRCC."
+  },
+
+  "nationalities": [
+    {
+      "slug": "mexicanos",
+      "display_name_es": "mexicanos",
+      "display_name_en": "Mexicans",
+      "country_code": "MX",
+      "visa_tier": "tier_1_waiver",
+      "consulate_locations": [],
+      "common_docs_required": [
+        "Pasaporte vigente (mínimo 6 meses de validez)",
+        "eTA aprobada (se gestiona online en menos de 72h)",
+        "Comprobante de fondos suficientes",
+        "Carta de aceptación de la escuela (recomendada)"
+      ],
+      "processing_time_days_avg": 1,
+      "notes": "Mexicanos necesitan eTA (Autorización de Viaje Electrónica) para viajar a Canadá en avión. No se requiere visa ni permiso de estudio para cursos de hasta 6 meses. Costo: $7 CAD, proceso 100% online en ircc.canada.ca.",
+      "last_verified_date": "2026-04-22",
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html"
+    },
+    {
+      "slug": "chilenos",
+      "display_name_es": "chilenos",
+      "display_name_en": "Chileans",
+      "country_code": "CL",
+      "visa_tier": "tier_1_waiver",
+      "consulate_locations": [],
+      "common_docs_required": [
+        "Pasaporte vigente (mínimo 6 meses de validez)",
+        "eTA aprobada (se gestiona online en menos de 72h)",
+        "Comprobante de fondos suficientes",
+        "Carta de aceptación de la escuela (recomendada)"
+      ],
+      "processing_time_days_avg": 1,
+      "notes": "Chilenos necesitan eTA para viajar a Canadá en avión. No se requiere visa ni permiso de estudio para cursos de hasta 6 meses. Costo: $7 CAD, proceso 100% online.",
+      "last_verified_date": "2026-04-22",
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html"
+    },
+    {
+      "slug": "argentinos",
+      "display_name_es": "argentinos",
+      "display_name_en": "Argentinians",
+      "country_code": "AR",
+      "visa_tier": "tier_1_waiver",
+      "consulate_locations": [],
+      "common_docs_required": [
+        "Pasaporte vigente (mínimo 6 meses de validez)",
+        "eTA aprobada (se gestiona online en menos de 72h)",
+        "Comprobante de fondos suficientes",
+        "Carta de aceptación de la escuela (recomendada)"
+      ],
+      "processing_time_days_avg": 1,
+      "notes": "Argentinos necesitan eTA para viajar a Canadá en avión. No se requiere visa ni permiso de estudio para cursos de hasta 6 meses. Costo: $7 CAD, proceso 100% online.",
+      "last_verified_date": "2026-04-22",
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html"
+    }
+  ],
+
+  "destinations": [
+    {
+      "slug": "canada",
+      "display_name_es": "Canadá",
+      "country_code": "CA",
+      "primary_language": "ingles",
+      "currency": "CAD",
+      "cost_of_living_monthly_eur": 1900,
+      "work_rights_default": "none",
+      "capital_city": "Ottawa",
+      "featured_cities": ["Toronto", "Vancouver", "Montreal", "Calgary"],
+      "last_verified_date": "2026-04-22"
+    }
+  ],
+
+  "visa_matrix": [
+    {
+      "_nationality_slug": "mexicanos",
+      "_destination_slug": "canada",
+      "visa_required": false,
+      "visa_type_name": "eTA (Autorización de Viaje Electrónica)",
+      "max_course_duration_weeks": 24,
+      "work_rights_during_study": "none",
+      "work_rights_after_study": "none",
+      "total_estimated_cost_eur": null,
+      "visa_cost_eur": 5,
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html",
+      "application_steps": [
+        { "step": 1, "description": "Entra a ircc.canada.ca/eTA desde tu computadora o celular." },
+        { "step": 2, "description": "Completa el formulario online con tu pasaporte y tarjeta de crédito. Costo: $7 CAD (≈ $5 USD)." },
+        { "step": 3, "description": "Recibes la aprobación por email en menos de 72 horas (generalmente en minutos). El eTA queda vinculado electrónicamente a tu pasaporte." }
+      ],
+      "typical_processing_weeks": 0,
+      "notes": "El eTA NO es una visa. Es un trámite electrónico equivalente al ESTA de Estados Unidos. Válido 5 años o hasta el vencimiento del pasaporte. No se requiere entrevista consular.",
+      "last_verified_date": "2026-04-22"
+    },
+    {
+      "_nationality_slug": "chilenos",
+      "_destination_slug": "canada",
+      "visa_required": false,
+      "visa_type_name": "eTA (Autorización de Viaje Electrónica)",
+      "max_course_duration_weeks": 24,
+      "work_rights_during_study": "none",
+      "work_rights_after_study": "none",
+      "total_estimated_cost_eur": null,
+      "visa_cost_eur": 5,
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html",
+      "application_steps": [
+        { "step": 1, "description": "Entra a ircc.canada.ca/eTA desde tu computadora o celular." },
+        { "step": 2, "description": "Completa el formulario online con tu pasaporte y tarjeta de crédito. Costo: $7 CAD (≈ $5 USD)." },
+        { "step": 3, "description": "Recibes la aprobación por email en menos de 72 horas (generalmente en minutos). El eTA queda vinculado electrónicamente a tu pasaporte." }
+      ],
+      "typical_processing_weeks": 0,
+      "notes": "El eTA NO es una visa. Trámite 100% online, sin entrevista. Válido 5 años o hasta el vencimiento del pasaporte.",
+      "last_verified_date": "2026-04-22"
+    },
+    {
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "canada",
+      "visa_required": false,
+      "visa_type_name": "eTA (Autorización de Viaje Electrónica)",
+      "max_course_duration_weeks": 24,
+      "work_rights_during_study": "none",
+      "work_rights_after_study": "none",
+      "total_estimated_cost_eur": null,
+      "visa_cost_eur": 5,
+      "official_source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html",
+      "application_steps": [
+        { "step": 1, "description": "Entra a ircc.canada.ca/eTA desde tu computadora o celular." },
+        { "step": 2, "description": "Completa el formulario online con tu pasaporte y tarjeta de crédito. Costo: $7 CAD (≈ $5 USD)." },
+        { "step": 3, "description": "Recibes la aprobación por email en menos de 72 horas (generalmente en minutos). El eTA queda vinculado electrónicamente a tu pasaporte." }
+      ],
+      "typical_processing_weeks": 0,
+      "notes": "El eTA NO es una visa. Trámite 100% online, sin entrevista. Válido 5 años o hasta el vencimiento del pasaporte.",
+      "last_verified_date": "2026-04-22"
+    }
+  ],
+
+  "pseo_pages": [
+
+    {
+      "_comment": "=== MEXICO → CANADA HUB ===",
+      "slug": "estudiar-ingles-en-canada/para-mexicanos",
+      "page_type": "overview",
+      "_nationality_slug": "mexicanos",
+      "_destination_slug": "canada",
+      "h1": "Estudiar inglés en Canadá para mexicanos — sin permiso de estudio",
+      "meta_title": "Estudiar Inglés en Canadá para Mexicanos 2026 | Sin Permiso",
+      "meta_description": "Cursos de inglés en Canadá para mexicanos. Sin permiso de estudio hasta 6 meses. Solo eTA ($7 CAD). Toronto y Vancouver. Asesoría Yaicos gratis.",
+      "no_study_permit": null,
+      "duration_weeks": null,
+      "persona_bullets": null,
+      "honest_outcomes": null,
+      "cost_breakdown": null,
+      "intro_prose": "<p>Canadá es uno de los destinos más buscados por estudiantes mexicanos que quieren mejorar su inglés, y por una razón muy concreta: <strong>para cursos de hasta 6 meses no necesitas permiso de estudio</strong>. Entras como visitante, estudias y regresas. Sin trámites consulares, sin esperas, sin complicaciones.</p><p>El único requisito de viaje es el <strong>eTA</strong> (Autorización de Viaje Electrónica), un trámite 100% online que cuesta $7 CAD y se aprueba en menos de 72 horas. Es el equivalente canadiense del ESTA de Estados Unidos.</p><p>Las ciudades más elegidas por estudiantes mexicanos son <strong>Toronto</strong> y <strong>Vancouver</strong>. Toronto ofrece la mayor oferta de escuelas y un ambiente multicultural vibrante. Vancouver combina naturaleza, calidad de vida y excelentes programas de inglés. Ambas tienen comunidades latinas establecidas que facilitan la adaptación.</p><p>Yaicos lleva años acompañando a estudiantes mexicanos en este proceso — desde la elección de la escuela hasta el primer día de clases. Consulta gratis por WhatsApp.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Los mexicanos necesitan visa para estudiar inglés en Canadá?",
+          "answer": "No. Para cursos de hasta 6 meses, los mexicanos no necesitan visa ni permiso de estudio. Solo necesitan el eTA (Autorización de Viaje Electrónica), que se tramita online en ircc.canada.ca, cuesta $7 CAD y se aprueba en menos de 72 horas."
+        },
+        {
+          "question": "¿Qué es el eTA y cómo se tramita?",
+          "answer": "El eTA es un permiso electrónico de viaje obligatorio para mexicanos que viajan a Canadá en avión. Se tramita en el sitio web oficial de IRCC (ircc.canada.ca), cuesta $7 CAD (aproximadamente $5 USD), y la respuesta llega por email en minutos u horas. Una vez aprobado, queda vinculado electrónicamente a tu pasaporte y es válido por 5 años o hasta que venza tu pasaporte."
+        },
+        {
+          "question": "¿Cuánto cuesta estudiar inglés en Canadá para un mexicano?",
+          "answer": "El costo total varía según duración y ciudad. Para un curso de 4 semanas en Toronto o Vancouver, estimas entre $3,500 y $5,500 CAD en total (matrícula + alojamiento + vuelo + gastos). Para 12 semanas, el rango sube a $9,000–$14,000 CAD. Desde México los vuelos son relativamente económicos, especialmente desde CDMX."
+        },
+        {
+          "question": "¿Toronto o Vancouver — cuál conviene más para mexicanos?",
+          "answer": "Depende de lo que busques. Toronto tiene mayor variedad de escuelas, precios ligeramente más accesibles y vuelos más baratos desde México. Vancouver tiene mejor clima (más templado), es más pequeña y manejable, y ofrece un entorno natural espectacular. Ambas son excelentes para aprender inglés. Te ayudamos a elegir según tu presupuesto y perfil."
+        },
+        {
+          "question": "¿Puedo trabajar mientras estudio en Canadá?",
+          "answer": "No. Con eTA (estatus de visitante/turista) no está permitido trabajar en Canadá. Si necesitas combinar estudio y trabajo, se requiere un permiso de estudio diferente y un programa de mayor duración. Consulta con nosotros si esto es una prioridad para ti."
+        },
+        {
+          "question": "¿Qué nivel de inglés necesito para entrar?",
+          "answer": "No necesitas ningún nivel mínimo. Las escuelas de idiomas en Canadá hacen un examen de clasificación el primer día para ubicarte en el grupo que corresponde a tu nivel actual, desde principiante hasta avanzado."
+        },
+        {
+          "question": "¿Cuándo es el mejor momento del año para ir?",
+          "answer": "Los meses más populares son junio, julio y agosto (verano canadiense), cuando el clima es más cálido y hay más actividades. Sin embargo, las escuelas están al máximo de ocupación en esas fechas. Enero-abril y septiembre-noviembre ofrecen precios más bajos, grupos más pequeños y mejor atención. En Canadá hace frío en invierno — en Toronto puede llegar a -10°C."
+        },
+        {
+          "question": "¿Yaicos me ayuda con todo el proceso?",
+          "answer": "Sí. Yaicos te acompaña desde la elección de escuela y ciudad, la inscripción, la gestión del eTA, la búsqueda de alojamiento y la preparación para el viaje. No cobramos honorarios al estudiante — nuestra comisión la paga la escuela cuando te inscribes. Consulta gratis por WhatsApp."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "mexicano",
+        "destination": "Canadá"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== MEXICO → CANADA 4 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-mexicanos/4-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "mexicanos",
+      "_destination_slug": "canada",
+      "duration_weeks": 4,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 4 semanas en Canadá para mexicanos",
+      "meta_title": "Inglés 4 Semanas en Canadá para Mexicanos | Sin Permiso 2026",
+      "meta_description": "Curso intensivo 4 semanas en Canadá. Sin permiso de estudio. Solo eTA $7 CAD. Desde ~$3,500 CAD. Toronto y Vancouver. Asesoría Yaicos gratis.",
+      "persona_bullets": [
+        "Quieres probar cómo es vivir y estudiar en Canadá antes de comprometerte con más tiempo",
+        "Tienes vacaciones limitadas (menos de 2 meses) y quieres aprovecharlas al máximo",
+        "Buscas una experiencia de inmersión rápida para romper el miedo a hablar inglés"
+      ],
+      "honest_outcomes": "En 4 semanas no vas a alcanzar fluidez, pero sí notarás un cambio real: más confianza para hablar, mejor comprensión de hablantes nativos y vocabulario cotidiano ampliado. Es la dosis perfecta para saber si quieres más. Estudiantes con inglés básico suelen sorprenderse de cuánto mejoran en un ambiente de inmersión total.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 1200,
+        "tuition_max": 1800,
+        "accommodation_min": 1000,
+        "accommodation_max": 1400,
+        "flights_min": 500,
+        "flights_max": 900,
+        "visa_fee": 7,
+        "total_min": 3500,
+        "total_max": 5500
+      },
+      "intro_prose": "<p>Un curso de 4 semanas en Canadá es la opción ideal para mexicanos que quieren una <strong>primera experiencia real de inmersión</strong> sin comprometerse con un viaje largo. Y la ventaja clave: con solo 4 semanas, <strong>no necesitas ningún permiso de estudio</strong> — entras como visitante con tu eTA ($7 CAD, online, en horas).</p><p>Desde México, los vuelos a Toronto y Vancouver son razonables, especialmente desde CDMX o Monterrey. Un presupuesto de $3,500–$5,500 CAD cubre matrícula, alojamiento y vuelo de ida y vuelta.</p>",
+      "faq_prose": [
+        {
+          "question": "¿4 semanas en Canadá son suficientes para mejorar mi inglés?",
+          "answer": "No vas a alcanzar fluidez en 4 semanas, pero sí notarás mejoras concretas: más confianza al hablar, mejor comprensión y vocabulario cotidiano ampliado. El mayor beneficio es la inmersión — escuchas y hablas inglés todo el día, no solo en clase. Es suficiente para saber si quieres volver por más tiempo."
+        },
+        {
+          "question": "¿Qué horario tiene un curso intensivo de 4 semanas?",
+          "answer": "La mayoría de las escuelas ofrecen cursos de 20–25 horas de clase por semana, de lunes a viernes, en horario de mañana (8:30–12:30 o 9:00–13:00). Las tardes quedan libres para actividades, excursiones o práctica informal con compañeros de otras nacionalidades."
+        },
+        {
+          "question": "¿Cuánto dinero necesito llevar de bolsillo para 4 semanas?",
+          "answer": "Además de tuition y alojamiento, estima entre $600–$900 CAD para gastos del mes: transporte (pase de metro/bus ~$130 CAD/mes), comida fuera, actividades y alguna excursión de fin de semana. Canadá es caro comparado con México — un almuerzo sencillo cuesta $15–$20 CAD."
+        },
+        {
+          "question": "¿Homestay o residencia estudiantil — qué conviene para 4 semanas?",
+          "answer": "Para estancias cortas de 4 semanas, el homestay (casa de familia canadiense) es la opción más común y práctica. Incluye habitación y desayuno/cena, cuesta $1,000–$1,400 CAD/mes y te sumerges en el idioma desde el primer día. Las residencias estudiantiles suelen requerir mínimos de 2–3 meses."
+        },
+        {
+          "question": "¿Puedo ir en cualquier época del año?",
+          "answer": "Sí, las escuelas funcionan todo el año con inicio de clases cada semana o cada dos semanas. El verano (junio–agosto) tiene más ambiente pero más costo y grupos más grandes. Enero–abril y septiembre–noviembre ofrecen mejor relación precio-calidad. En invierno hace frío en Toronto (hasta -10°C) y más suave en Vancouver."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "mexicano",
+        "destination": "Canadá",
+        "duration": "4 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== MEXICO → CANADA 8 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-mexicanos/8-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "mexicanos",
+      "_destination_slug": "canada",
+      "duration_weeks": 8,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 8 semanas en Canadá para mexicanos",
+      "meta_title": "Inglés 8 Semanas en Canadá para Mexicanos | Sin Permiso 2026",
+      "meta_description": "Curso de inglés 8 semanas en Canadá. Sin permiso de estudio. Solo eTA $7 CAD. Desde ~$6,500 CAD. Mejora real de A2 a B1. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Quieres una mejora real y medible en tu inglés, no solo una experiencia rápida",
+        "Eres estudiante, recién graduado o profesional con 2 meses disponibles",
+        "Tienes inglés básico o intermedio y quieres llegar a un nivel funcional en tu trabajo o carrera"
+      ],
+      "honest_outcomes": "8 semanas es el punto de inflexión donde la inmersión empieza a generar resultados sólidos. Si entras en nivel A2 (básico), puedes esperar alcanzar B1 (intermedio) con dedicación. Si ya estás en B1, notarás un salto claro hacia B2. La fluidez conversacional mejora notablemente porque el cerebro ya se 'acostumbra' a pensar en inglés.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 2400,
+        "tuition_max": 3600,
+        "accommodation_min": 2000,
+        "accommodation_max": 2800,
+        "flights_min": 500,
+        "flights_max": 900,
+        "visa_fee": 7,
+        "total_min": 6500,
+        "total_max": 9500
+      },
+      "intro_prose": "<p>8 semanas en Canadá es el formato más equilibrado para mexicanos que buscan una <strong>mejora real y medible</strong> en su inglés. No tan corto como para no ver resultados, no tan largo como para complicar la logística laboral o familiar.</p><p>Con 8 semanas, el cerebro tiene tiempo de adaptarse al idioma — algo que simplemente no sucede en 4 semanas. Y sigues sin necesitar permiso de estudio: entras con tu eTA, estudias y vuelves. Simple.</p><p>El presupuesto típico para 8 semanas ronda entre $6,500 y $9,500 CAD (vuelos desde México incluidos), dependiendo de la ciudad y el tipo de alojamiento.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Qué nivel de inglés puedo esperar después de 8 semanas?",
+          "answer": "Depende de tu nivel de entrada. Si comienzas en A2 (básico), con buena dedicación puedes alcanzar B1 (intermedio conversacional). Si entras en B1, el salto hacia B2 es realista. El factor clave es la inmersión: vivir en inglés fuera del aula acelera el proceso significativamente."
+        },
+        {
+          "question": "¿8 semanas es suficiente para poner en el CV?",
+          "answer": "Sí. Muchas escuelas emiten un certificado de asistencia y nivel al finalizar el curso. No es equivalente a un Cambridge o IELTS, pero demuestra compromiso con el idioma y experiencia internacional. Si tu objetivo es una certificación reconocida, hay programas de 12 semanas con preparación Cambridge."
+        },
+        {
+          "question": "¿Puedo trabajar medio tiempo con el eTA durante 8 semanas?",
+          "answer": "No. El eTA (estatus de visitante) no permite trabajar en Canadá bajo ningún concepto. Si el trabajo es una prioridad, necesitarías un permiso de estudio distinto con un programa diferente. Consúltanos para encontrar la opción correcta según tus objetivos."
+        },
+        {
+          "question": "¿Cuánto cuesta el alojamiento para 8 semanas en Toronto vs Vancouver?",
+          "answer": "Homestay en Toronto: $900–$1,300 CAD/mes (habitación + 2 comidas). Vancouver: $1,000–$1,400 CAD/mes. Residencia estudiantil: $1,200–$1,800 CAD/mes en ambas ciudades. Para 8 semanas, el homestay sigue siendo la opción más práctica y económica para la mayoría."
+        },
+        {
+          "question": "¿Hay actividades fuera de clase para practicar inglés?",
+          "answer": "Todas las escuelas organizan actividades extracurriculares: excursiones de fin de semana, noches de conversación, deporte, visitas culturales. Además, convives con estudiantes de muchas otras nacionalidades (europeos, asiáticos, latinoamericanos) con quienes el inglés es el único idioma común. Eso vale más que las horas de clase."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "mexicano",
+        "destination": "Canadá",
+        "duration": "8 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== MEXICO → CANADA 12 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-mexicanos/12-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "mexicanos",
+      "_destination_slug": "canada",
+      "duration_weeks": 12,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 12 semanas en Canadá para mexicanos",
+      "meta_title": "Inglés 12 Semanas en Canadá para Mexicanos | Sin Permiso 2026",
+      "meta_description": "Curso intensivo 12 semanas en Canadá sin permiso de estudio. Mejora B1→B2. Prep Cambridge disponible. Desde ~$9,500 CAD. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Tu objetivo es llegar a un inglés funcional para tu carrera profesional o para emigrar",
+        "Quieres optar a una certificación de inglés reconocida (Cambridge B2, IELTS)",
+        "Puedes ausentarte 3 meses y tienes el presupuesto para una inversión seria"
+      ],
+      "honest_outcomes": "12 semanas (3 meses) es el umbral donde la mejora se convierte en transformación. Si entras en B1, alcanzar B2 es un objetivo realista con trabajo constante. Si ya estás en B2, puedes preparar Cambridge FCE o apuntar a C1. Muchos estudiantes vuelven capaces de trabajar en inglés en entornos internacionales.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 3600,
+        "tuition_max": 5400,
+        "accommodation_min": 3000,
+        "accommodation_max": 4200,
+        "flights_min": 500,
+        "flights_max": 900,
+        "visa_fee": 7,
+        "total_min": 9500,
+        "total_max": 14000
+      },
+      "intro_prose": "<p>12 semanas de inglés en Canadá es la opción para mexicanos que van <strong>en serio</strong>. No como turismo lingüístico — como inversión en su carrera. Y sigue siendo el período mágico donde <strong>no necesitas permiso de estudio</strong>: 12 semanas son exactamente 3 meses, bien dentro del límite de 6 meses sin permiso.</p><p>A los 3 meses, el cerebro ya no trabaja para hablar inglés — simplemente lo habla. La diferencia entre alguien de 4 semanas y alguien de 12 semanas es notable incluso para ellos mismos.</p><p>Muchas escuelas en Toronto y Vancouver ofrecen programas de preparación para Cambridge (FCE/CAE) o IELTS dentro de los 12 semanas. Si el certificado es tu objetivo, este es el formato correcto.</p>",
+      "faq_prose": [
+        {
+          "question": "¿12 semanas realmente no requieren permiso de estudio en Canadá?",
+          "answer": "Correcto. La regla de IRCC es clara: cursos de 6 meses o menos no requieren permiso de estudio. 12 semanas son 3 meses, dentro del límite. Solo necesitas el eTA ($7 CAD). Fuente oficial: canada.ca/en/immigration-refugees-citizenship/services/study-canada/study-permit/study-permit-tool.html"
+        },
+        {
+          "question": "¿Puedo preparar Cambridge o IELTS en 12 semanas?",
+          "answer": "Sí. Muchas escuelas ofrecen programas específicos de preparación para Cambridge FCE (B2), CAE (C1) o IELTS dentro del formato de 12 semanas. El nivel de entrada recomendado para estos programas suele ser B1 o superior. Consulta con Yaicos qué escuelas tienen mejor historial de resultados en exámenes."
+        },
+        {
+          "question": "¿Cómo es la vida cotidiana durante 12 semanas en Canadá?",
+          "answer": "Clases de lunes a viernes por la mañana (20–25h/semana). Tardes libres para actividades extracurriculares, explorar la ciudad, deporte o estudiar. Los fines de semana son ideales para excursiones: las Cataratas del Niágara desde Toronto, Whistler desde Vancouver. Con 3 meses, tienes tiempo de realmente conocer el país, no solo las aulas."
+        },
+        {
+          "question": "¿Es mejor hacer 12 semanas en Toronto o en Vancouver?",
+          "answer": "Ambas son excelentes. Toronto tiene más variedad de escuelas, precios ligeramente menores y conexiones de vuelo más económicas desde México. Vancouver ofrece mejor clima (sin inviernos tan fríos), es más compacta y muchos la prefieren por su calidad de vida. Para estancias de 3 meses, la diferencia de costo de vida se vuelve relevante: Vancouver es un 10–15% más cara."
+        },
+        {
+          "question": "¿Qué pasa si decido quedarme más de 12 semanas?",
+          "answer": "Si decides extender más allá de 6 meses en total, necesitas tramitar un permiso de estudio desde antes de viajar o solicitar un cambio de estatus dentro de Canadá (más complejo). Yaicos puede orientarte sobre las opciones si ves que quieres más tiempo durante tu estadía."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "mexicano",
+        "destination": "Canadá",
+        "duration": "12 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== CHILE → CANADA HUB ===",
+      "slug": "estudiar-ingles-en-canada/para-chilenos",
+      "page_type": "overview",
+      "_nationality_slug": "chilenos",
+      "_destination_slug": "canada",
+      "h1": "Estudiar inglés en Canadá para chilenos — sin permiso de estudio",
+      "meta_title": "Estudiar Inglés en Canadá para Chilenos 2026 | Sin Permiso",
+      "meta_description": "Cursos de inglés en Canadá para chilenos. Sin permiso de estudio hasta 6 meses. Solo eTA $7 CAD. Toronto, Vancouver, Montreal. Yaicos asesora gratis.",
+      "no_study_permit": null,
+      "duration_weeks": null,
+      "persona_bullets": null,
+      "honest_outcomes": null,
+      "cost_breakdown": null,
+      "intro_prose": "<p>Canadá es el destino número uno para chilenos que quieren estudiar inglés en serio. La razón principal: <strong>para cursos de hasta 6 meses no necesitas permiso de estudio</strong>. Solo el eTA — un trámite online de $7 CAD que se aprueba en horas.</p><p>El poder adquisitivo chileno hace de Canadá un destino accesible comparado con UK o Australia. Los vuelos desde Santiago tienen conexión directa o con una escala, y el mercado laboral canadiense es destino aspiracional para muchos chilenos que quieren hacer carrera internacional.</p><p>Las ciudades preferidas por estudiantes chilenos son <strong>Toronto</strong> y <strong>Vancouver</strong>. Vancouver tiene el atractivo adicional de su cercanía con el Pacífico y un clima más parecido al de Chile central. Montreal es una alternativa interesante si te interesa también el contexto francófono.</p><p>Yaicos ha acompañado a decenas de estudiantes chilenos en este proceso. Consulta sin costo por WhatsApp.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Los chilenos necesitan visa para estudiar en Canadá?",
+          "answer": "No. Para cursos de hasta 6 meses, los chilenos solo necesitan el eTA (Autorización de Viaje Electrónica). No hay visa de estudiante, no hay entrevista consular. El eTA se tramita en ircc.canada.ca, cuesta $7 CAD y se aprueba en minutos u horas."
+        },
+        {
+          "question": "¿Cuánto cuesta estudiar inglés en Canadá para un chileno?",
+          "answer": "Para un curso de 4 semanas en Toronto o Vancouver, el presupuesto total (matrícula + alojamiento + vuelo desde Santiago) ronda entre $4,500 y $7,000 CAD. Para 12 semanas, entre $11,000 y $16,000 CAD. El vuelo desde Santiago es el gasto más significativo: $900–$1,400 CAD en promedio."
+        },
+        {
+          "question": "¿Vancouver o Toronto para chilenos?",
+          "answer": "Vancouver es la favorita de muchos chilenos: clima más suave, ciudad compacta, hermosa naturaleza y una comunidad latinoamericana establecida. Toronto tiene más variedad de escuelas, es más económica en algunos aspectos y tiene mejor conectividad con el resto de Canadá. Ambas son excelentes — te ayudamos a elegir según tu perfil."
+        },
+        {
+          "question": "¿Puedo trabajar mientras estudio en Canadá con eTA?",
+          "answer": "No. El eTA da estatus de visitante, que no permite trabajar. Para trabajar necesitarías un permiso de estudio diferente con un programa de mayor duración. Para cursos de 4–12 semanas, el objetivo es el aprendizaje del idioma, no el trabajo."
+        },
+        {
+          "question": "¿El inglés en Canadá es diferente al de otros países?",
+          "answer": "El inglés canadiense es muy neutro y fácil de entender para hispanohablantes — similar al americano con algunas variaciones propias. Las ciudades grandes como Toronto y Vancouver son multicultural y multilingüe, por lo que encontrarás hablantes de inglés de todo el mundo, lo que enriquece aún más la experiencia."
+        },
+        {
+          "question": "¿Yaicos tiene convenios con escuelas en Canadá?",
+          "answer": "Sí. Yaicos trabaja con escuelas acreditadas en Toronto y Vancouver con las que tiene relación directa. Esto nos permite ofrecer información precisa sobre precios, programas y disponibilidad, y acompañarte en todo el proceso de inscripción sin cobrarte ningún honorario."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "chileno",
+        "destination": "Canadá"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== CHILE → CANADA 4 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-chilenos/4-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "chilenos",
+      "_destination_slug": "canada",
+      "duration_weeks": 4,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 4 semanas en Canadá para chilenos",
+      "meta_title": "Inglés 4 Semanas en Canadá para Chilenos | Sin Permiso 2026",
+      "meta_description": "Curso intensivo 4 semanas en Canadá sin permiso de estudio. Solo eTA $7 CAD. Desde ~$4,500 CAD (incluye vuelo). Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Tienes vacaciones de verano chileno (diciembre–marzo) y quieres aprovecharlas con algo productivo",
+        "Quieres una primera experiencia en Canadá antes de decidir si volver por más tiempo",
+        "Buscas mejorar tu inglés conversacional para un proyecto profesional o personal próximo"
+      ],
+      "honest_outcomes": "4 semanas de inmersión en Canadá te dan confianza real para hablar inglés en situaciones cotidianas. No llegarás a fluidez, pero sí romperás la barrera del miedo a hablar. Muchos estudiantes chilenos regresan y dicen que el mayor cambio fue mental, no solo lingüístico.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 1200,
+        "tuition_max": 1800,
+        "accommodation_min": 1000,
+        "accommodation_max": 1400,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 4500,
+        "total_max": 7000
+      },
+      "intro_prose": "<p>Un mes en Canadá es la forma más accesible de vivir una experiencia real de inglés para chilenos. <strong>No necesitas permiso de estudio</strong> — solo el eTA de $7 CAD — y puedes ir en cualquier época del año.</p><p>Desde Santiago hay vuelos directos o con una escala a Toronto y Vancouver. El verano chileno (diciembre–marzo) coincide con el invierno canadiense — frío, pero con grupos más pequeños y mejores precios. El invierno chileno (junio–agosto) es el verano canadiense — más ambiente pero más caro.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Qué mejora en 4 semanas de inglés en Canadá?",
+          "answer": "Lo que más mejora en 4 semanas es la confianza oral y la comprensión auditiva. Escuchas inglés todo el día — en clase, en el transporte, en cafeterías — y el cerebro se ajusta rápido. El vocabulario cotidiano y la pronunciación mejoran notablemente. La gramática necesita más tiempo para consolidarse."
+        },
+        {
+          "question": "¿Es el verano chileno buen momento para ir a Canadá?",
+          "answer": "Sí, aunque coincide con el invierno canadiense. En Vancouver el invierno es suave (2–8°C, lluvia frecuente). En Toronto hace más frío (-5 a -10°C). A cambio: menos estudiantes, grupos más pequeños, precios más bajos y más atención de los profesores. Para muchos chilenos es la época ideal porque coincide con sus vacaciones."
+        },
+        {
+          "question": "¿Cuánto cuesta el vuelo Santiago–Toronto o Santiago–Vancouver?",
+          "answer": "El vuelo desde Santiago (SCL) a Toronto (YYZ) o Vancouver (YVR) con escala cuesta entre $900 y $1,400 CAD en promedio, dependiendo de la temporada y con qué antelación compras. Te recomendamos comprar con al menos 2–3 meses de anticipación para mejores precios."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "chileno",
+        "destination": "Canadá",
+        "duration": "4 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== CHILE → CANADA 8 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-chilenos/8-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "chilenos",
+      "_destination_slug": "canada",
+      "duration_weeks": 8,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 8 semanas en Canadá para chilenos",
+      "meta_title": "Inglés 8 Semanas en Canadá para Chilenos | Sin Permiso 2026",
+      "meta_description": "Curso de inglés 8 semanas en Canadá sin permiso. Solo eTA. Desde ~$8,000 CAD. Mejora real garantizada. Toronto y Vancouver. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Quieres una mejora tangible en tu inglés para usarlo en tu trabajo o carrera",
+        "Tienes 2 meses disponibles y quieres aprovecharlos en algo que cambie tu perfil profesional",
+        "Estás considerando emigrar a Canadá en el futuro y quieres conocer el país de cerca"
+      ],
+      "honest_outcomes": "8 semanas en Canadá produce resultados medibles. Estudiantes que entran en nivel A2–B1 suelen alcanzar B1–B2 al terminar. Más importante: la comodidad para sostener conversaciones en inglés cambia radicalmente. Dos meses es suficiente para que el inglés deje de sentirse como 'traducción mental' y empiece a fluir.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 2400,
+        "tuition_max": 3600,
+        "accommodation_min": 2000,
+        "accommodation_max": 2800,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 8000,
+        "total_max": 11500
+      },
+      "intro_prose": "<p>8 semanas en Canadá es el formato elegido por chilenos que quieren una <strong>mejora real y documentable</strong> en su inglés — no solo una experiencia. Sin permiso de estudio, solo eTA.</p><p>Dos meses son suficientes para que el cerebro deje de 'traducir' y empiece a pensar directamente en inglés. Eso marca una diferencia que se nota en reuniones de trabajo, entrevistas y conversaciones espontáneas.</p>",
+      "faq_prose": [
+        {
+          "question": "¿8 semanas en Canadá mejora el inglés para trabajo?",
+          "answer": "Sí, especialmente si ya tienes un nivel básico o intermedio. Al regresar notarás más fluidez verbal, mejor comprensión de reuniones o llamadas en inglés, y mayor confianza general. Muchos empleadores chilenos valoran la experiencia internacional tanto como el nivel de idioma."
+        },
+        {
+          "question": "¿Puedo hacer 8 semanas en dos ciudades distintas (Toronto + Vancouver)?",
+          "answer": "Sí, aunque no es lo más recomendable. Cambiar de escuela a las 4 semanas implica pagar dos matrículas, dos depósitos de alojamiento y tiempo de adaptación. Si quieres conocer ambas ciudades, es mejor hacerlo en los fines de semana desde una base fija. El tren o vuelo entre Toronto y Vancouver es largo (5h en vuelo)."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "chileno",
+        "destination": "Canadá",
+        "duration": "8 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== CHILE → CANADA 12 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-chilenos/12-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "chilenos",
+      "_destination_slug": "canada",
+      "duration_weeks": 12,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 12 semanas en Canadá para chilenos",
+      "meta_title": "Inglés 12 Semanas en Canadá para Chilenos | Sin Permiso 2026",
+      "meta_description": "Curso intensivo 12 semanas en Canadá sin permiso de estudio. Nivel B2, prep Cambridge. Desde ~$12,000 CAD. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Tu meta es llegar a nivel B2 o preparar Cambridge FCE para tu carrera o para emigrar",
+        "Quieres conocer Canadá a fondo — no solo la escuela, sino vivir realmente en el país",
+        "Estás en un momento de transición profesional y quieres el inglés como herramienta sólida"
+      ],
+      "honest_outcomes": "12 semanas es la duración donde la transformación es real y permanente. Estudiantes que llegan en B1 y trabajan con constancia alcanzan B2 sólido. Los que llegan en B2 pueden preparar Cambridge FCE o CAE con opción real de certificarse. Al regresar, el inglés ya no es un obstáculo — es una herramienta.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 3600,
+        "tuition_max": 5400,
+        "accommodation_min": 3000,
+        "accommodation_max": 4200,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 11500,
+        "total_max": 16000
+      },
+      "intro_prose": "<p>3 meses en Canadá. Es el formato donde el inglés deja de ser un desafío y se convierte en una habilidad. Para chilenos que van <strong>en serio</strong> con el idioma — sea para emigrar, para trabajar en empresas internacionales o para estudiar en el extranjero — 12 semanas es la inversión correcta.</p><p>Y aun así: <strong>sin permiso de estudio</strong>. 12 semanas son 3 meses, bien dentro del límite de 6 meses sin permiso de IRCC.</p>",
+      "faq_prose": [
+        {
+          "question": "¿12 semanas en Canadá me ayuda si quiero emigrar después?",
+          "answer": "Directamente, no. Las vías de inmigración a Canadá (Express Entry, Provincial Nominee Programs) tienen sus propios requisitos. Pero 12 semanas mejoran dos cosas que sí impactan la inmigración: tu nivel de inglés (que se evalúa en IELTS o CELPIP) y tu conocimiento real del país, que facilita la adaptación. Muchos chilenos que emigran a Canadá hicieron un curso previo exactamente por eso."
+        },
+        {
+          "question": "¿Las escuelas emiten certificado al terminar 12 semanas?",
+          "answer": "Sí. La mayoría emite un certificado de asistencia y nivel final. Algunas escuelas son centros de examen Cambridge, por lo que puedes rendir el FCE o CAE directamente al terminar el curso de preparación. Consulta a Yaicos qué escuelas tienen esta opción."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "chileno",
+        "destination": "Canadá",
+        "duration": "12 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== ARGENTINA → CANADA HUB ===",
+      "slug": "estudiar-ingles-en-canada/para-argentinos",
+      "page_type": "overview",
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "canada",
+      "h1": "Estudiar inglés en Canadá para argentinos — sin permiso de estudio",
+      "meta_title": "Estudiar Inglés en Canadá para Argentinos 2026 | Sin Permiso",
+      "meta_description": "Cursos de inglés en Canadá para argentinos. Sin permiso de estudio hasta 6 meses. Solo eTA $7 CAD. Toronto y Vancouver. Precios en USD/CAD. Yaicos asesora.",
+      "no_study_permit": null,
+      "duration_weeks": null,
+      "persona_bullets": null,
+      "honest_outcomes": null,
+      "cost_breakdown": null,
+      "intro_prose": "<p>Canadá es una opción cada vez más elegida por argentinos que quieren estudiar inglés en un país estable, seguro y con excelente calidad educativa. Y tiene una ventaja enorme: <strong>para cursos de hasta 6 meses no necesitas permiso de estudio</strong>. Solo el eTA — un trámite online de $7 CAD.</p><p>Para argentinos, estudiar en Canadá implica presupuestar en dólares canadienses (CAD) o dólares estadounidenses (USD). Esto es importante: los precios aquí están en CAD, que cotiza aproximadamente a 0.7 USD. Consultar con Yaicos ayuda a entender el presupuesto real en la moneda que manejes.</p><p>Las ciudades más elegidas son <strong>Toronto</strong> (mayor oferta educativa, más conexiones aéreas desde Buenos Aires) y <strong>Vancouver</strong> (mejor clima, ciudad más compacta y con paisajes espectaculares).</p>",
+      "faq_prose": [
+        {
+          "question": "¿Los argentinos necesitan visa para estudiar en Canadá?",
+          "answer": "No. Para cursos de hasta 6 meses, los argentinos solo necesitan el eTA (Autorización de Viaje Electrónica). No hay visa de estudiante ni entrevista consular. El eTA se tramita en ircc.canada.ca, cuesta $7 CAD y se aprueba en horas."
+        },
+        {
+          "question": "¿Cuánto cuesta estudiar inglés en Canadá para un argentino?",
+          "answer": "Para un curso de 4 semanas incluyendo vuelo desde Buenos Aires, el presupuesto total ronda entre $4,500 y $7,000 CAD (≈ $3,200–$5,000 USD). Para 12 semanas, entre $12,000 y $17,000 CAD. El vuelo es la partida más significativa (generalmente $900–$1,400 CAD desde Buenos Aires)."
+        },
+        {
+          "question": "¿Cómo pago la matrícula siendo argentino?",
+          "answer": "Las escuelas canadienses aceptan transferencia internacional en CAD o USD. Yaicos puede orientarte sobre las opciones más convenientes para transferir desde Argentina, evitando pérdidas innecesarias por tipo de cambio o restricciones bancarias."
+        },
+        {
+          "question": "¿Es Canadá mejor que Irlanda para argentinos?",
+          "answer": "Depende del objetivo. Irlanda tiene la ventaja de que los argentinos no necesitan visa previa (entran como turistas y obtienen Student Permission al llegar). Canadá tiene el eTA que es igual de simple. El costo total suele ser similar. Canadá ofrece ciudades más grandes y dinámicas; Irlanda es más pequeña y con una comunidad latinoamericana muy establecida. Para muchos argentinos que piensan en inmigración futura, Canadá tiene programas más accesibles."
+        },
+        {
+          "question": "¿Yaicos tiene experiencia con estudiantes argentinos?",
+          "answer": "Sí. Yaicos trabaja con estudiantes de toda Latinoamérica, incluyendo Argentina. Entendemos las particularidades del contexto argentino (transferencias internacionales, documentación, preferencias de destino) y acompañamos todo el proceso sin cobrar honorarios al estudiante."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "argentino",
+        "destination": "Canadá"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== ARGENTINA → CANADA 4 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-argentinos/4-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "canada",
+      "duration_weeks": 4,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 4 semanas en Canadá para argentinos",
+      "meta_title": "Inglés 4 Semanas en Canadá para Argentinos | Sin Permiso 2026",
+      "meta_description": "Curso de inglés 4 semanas en Canadá. Sin permiso de estudio. Solo eTA $7 CAD. Desde ~$4,500 CAD. Toronto y Vancouver. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Querés una primera experiencia internacional sin comprometerte con un viaje largo",
+        "Tenés vacaciones o una pausa entre proyectos y querés invertirlas en algo concreto",
+        "Buscás mejorar tu inglés para trabajo remoto, entrevistas o proyectos internacionales"
+      ],
+      "honest_outcomes": "4 semanas de inmersión en Canadá mejoran la confianza para hablar inglés y la comprensión auditiva de forma notable. No alcanzarás fluidez, pero muchos argentinos vuelven sorprendidos de lo que se aprende cuando el inglés es el único idioma disponible todo el día.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 1200,
+        "tuition_max": 1800,
+        "accommodation_min": 1000,
+        "accommodation_max": 1400,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 4500,
+        "total_max": 7000
+      },
+      "intro_prose": "<p>4 semanas en Canadá es la entrada perfecta para argentinos que quieren probar la experiencia sin un compromiso largo. <strong>Sin permiso de estudio, solo el eTA</strong> — $7 CAD online.</p><p>Desde Buenos Aires hay vuelos a Toronto con escala en distintas ciudades. El presupuesto total de 4 semanas (vuelo + matrícula + alojamiento) ronda entre $4,500 y $7,000 CAD.</p>",
+      "faq_prose": [
+        {
+          "question": "¿Vale la pena ir 4 semanas a Canadá desde Argentina?",
+          "answer": "Sí, especialmente si es tu primera experiencia de inmersión. La diferencia entre aprender inglés en Buenos Aires y aprenderlo en un entorno donde solo existe el inglés es enorme. 4 semanas pueden cambiar tu relación con el idioma de forma permanente."
+        },
+        {
+          "question": "¿Cuánto cuesta el vuelo desde Buenos Aires a Canadá?",
+          "answer": "El vuelo desde Buenos Aires (EZE) a Toronto (YYZ) o Vancouver (YVR) cuesta aproximadamente $900–$1,400 CAD (≈ $650–$1,000 USD), con una escala generalmente en Lima, Bogotá, Miami o Ciudad de México. Comprando con 2–3 meses de anticipación encontrás los mejores precios."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "argentino",
+        "destination": "Canadá",
+        "duration": "4 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== ARGENTINA → CANADA 8 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-argentinos/8-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "canada",
+      "duration_weeks": 8,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 8 semanas en Canadá para argentinos",
+      "meta_title": "Inglés 8 Semanas en Canadá para Argentinos | Sin Permiso 2026",
+      "meta_description": "Curso de inglés 8 semanas en Canadá sin permiso. Solo eTA. Desde ~$8,000 CAD. Mejora real A2→B1. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Tu meta es mejorar el inglés para trabajo remoto con empresas internacionales o para emigrar",
+        "Tenés 2 meses disponibles y querés aprovecharlos con algo que tenga impacto real en tu carrera",
+        "Estás en nivel básico o intermedio y querés alcanzar un nivel funcional para comunicarte con soltura"
+      ],
+      "honest_outcomes": "8 semanas producen el primer cambio real de paradigma con el inglés. Estudiantes que entran en A2 alcanzan B1. Los que entran en B1 dan un salto claro hacia B2. Más importante: la ansiedad al hablar en inglés desaparece casi por completo después de dos meses de inmersión constante.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 2400,
+        "tuition_max": 3600,
+        "accommodation_min": 2000,
+        "accommodation_max": 2800,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 8000,
+        "total_max": 12000
+      },
+      "intro_prose": "<p>8 semanas en Canadá para argentinos: la dosis donde el inglés empieza a sentirse natural. Sin permiso de estudio, solo eTA.</p><p>Dos meses son suficientes para que el cerebro se recalibrate — dejas de buscar las palabras y empezás a hablar. Para argentinos que trabajan o quieren trabajar en entornos internacionales, este es el salto que hace la diferencia.</p>",
+      "faq_prose": [
+        {
+          "question": "¿8 semanas en Canadá mejoran el inglés para trabajo remoto?",
+          "answer": "Sí, de forma muy concreta. Las habilidades que más mejoran en 8 semanas son exactamente las que se usan en trabajo remoto: comprensión de reuniones en inglés, capacidad de expresarse con claridad por escrito y oralmente, y confianza en situaciones de alta presión como presentaciones o entrevistas."
+        },
+        {
+          "question": "¿Cómo mando dinero a Canadá siendo argentino para pagar la escuela?",
+          "answer": "Las opciones más usadas por argentinos son: transferencia mediante servicios como Wise (TransferWise) en USD o CAD, pago con tarjeta de crédito internacional, o a través de Yaicos que puede orientarte sobre el método más conveniente y económico según tu situación bancaria actual."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "argentino",
+        "destination": "Canadá",
+        "duration": "8 semanas"
+      },
+      "generated_by": "manual"
+    },
+
+    {
+      "_comment": "=== ARGENTINA → CANADA 12 SEMANAS ===",
+      "slug": "estudiar-ingles-en-canada/para-argentinos/12-semanas",
+      "page_type": "duration_specific",
+      "_nationality_slug": "argentinos",
+      "_destination_slug": "canada",
+      "duration_weeks": 12,
+      "no_study_permit": true,
+      "h1": "Curso de inglés 12 semanas en Canadá para argentinos",
+      "meta_title": "Inglés 12 Semanas en Canadá para Argentinos | Sin Permiso 2026",
+      "meta_description": "Curso intensivo 12 semanas en Canadá sin permiso de estudio. Nivel B2, prep Cambridge. Desde ~$12,500 CAD. Yaicos asesora gratis.",
+      "persona_bullets": [
+        "Tu meta es alcanzar nivel B2 o preparar Cambridge FCE para tu carrera o para emigrar a Canadá",
+        "Querés conocer Canadá en profundidad y evaluar si es un destino de vida para vos",
+        "Estás en un momento de cambio y querés el inglés como herramienta sólida para lo que viene"
+      ],
+      "honest_outcomes": "12 semanas es donde la transformación con el inglés se vuelve permanente. Estudiantes argentinos que llegan en B1 alcanzan B2 con trabajo constante. Al regresar, el inglés ya no es un obstáculo — es una ventaja competitiva. Muchos dicen que los primeros 3 meses en Canadá cambiaron su forma de ver el mundo.",
+      "cost_breakdown": {
+        "currency": "CAD",
+        "tuition_min": 3600,
+        "tuition_max": 5400,
+        "accommodation_min": 3000,
+        "accommodation_max": 4200,
+        "flights_min": 900,
+        "flights_max": 1400,
+        "visa_fee": 7,
+        "total_min": 12000,
+        "total_max": 17000
+      },
+      "intro_prose": "<p>3 meses en Canadá. Para argentinos que van a fondo con el inglés — ya sea para emigrar, para trabajar en empresas globales o para estudiar en el exterior — este es el formato que produce resultados permanentes.</p><p>12 semanas son 3 meses. <strong>Sin permiso de estudio</strong>, dentro del límite de 6 meses sin permiso de IRCC. Solo eTA.</p><p>En 3 meses no solo mejorás el inglés — conocés el país, hacés contactos internacionales y tomás una decisión informada sobre si Canadá es parte de tu proyecto de vida.</p>",
+      "faq_prose": [
+        {
+          "question": "¿12 semanas en Canadá sirve como base para emigrar?",
+          "answer": "Como experiencia previa, sí. Vivir 3 meses en Canadá te da un conocimiento real del país — ciudades, sistema, cultura, mercado laboral — que hace el proceso de emigración mucho más informado. Además mejora tu inglés, que es un requisito clave para los programas de inmigración como Express Entry (que evalúa IELTS o CELPIP)."
+        },
+        {
+          "question": "¿Puedo preparar IELTS o Cambridge en 12 semanas en Canadá?",
+          "answer": "Sí. Muchas escuelas en Toronto y Vancouver tienen programas específicos de preparación para IELTS o Cambridge (FCE/CAE). El nivel de entrada recomendado suele ser B1 o superior. Al terminar el curso podés rendir el examen directamente en Canadá antes de regresar. Consultá con Yaicos qué escuelas tienen esta opción."
+        },
+        {
+          "question": "¿Qué pasa si quiero quedarme más de 12 semanas en Canadá?",
+          "answer": "Si querés extender más allá de 6 meses en total, necesitás tramitar un permiso de estudio desde antes de salir de Argentina. Si ya estás en Canadá, podés aplicar para cambio de estatus (más complejo). Yaicos puede orientarte sobre estas opciones si durante tu estadía decidís quedarte más tiempo."
+        }
+      ],
+      "whatsapp_context": {
+        "nationality": "argentino",
+        "destination": "Canadá",
+        "duration": "12 semanas"
+      },
+      "generated_by": "manual"
+    }
+
+  ]
+}
