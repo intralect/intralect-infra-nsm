@@ -1,0 +1,206 @@
+{
+  "_meta": {
+    "description": "Canadian language schools seed — EC Toronto + ILAC Vancouver. Verify before publish.",
+    "last_verified": "2026-04-22"
+  },
+  "schools": [
+    {
+      "name": "EC English Toronto",
+      "slug": "ec-english-toronto",
+      "city": "Toronto",
+      "country": "Canada",
+      "country_code": "CA",
+      "school_type": "language_school",
+      "school_size": "large",
+      "currency": "CAD",
+      "address": "90 Eglinton Ave E, Toronto, ON M4P 2Y3",
+      "latitude": 43.7077,
+      "longitude": -79.3969,
+      "website_url": "https://www.ecenglish.com/en/locations/toronto-english-school",
+      "is_featured": true,
+      "display_order": 1,
+      "commission_tier": "standard",
+      "accreditations": ["Languages Canada", "ICEF"],
+      "school_size_note": "large",
+      "max_class_size": 15,
+      "average_student_age": 26,
+      "nationalities_count": 30,
+      "nationality_mix": [
+        { "country": "Mexico", "percentage": 20 },
+        { "country": "Brazil", "percentage": 15 },
+        { "country": "Colombia", "percentage": 12 },
+        { "country": "Japan", "percentage": 10 }
+      ],
+      "language_levels_offered": ["A1", "A2", "B1", "B2", "C1"],
+      "exams_offered": ["IELTS", "Cambridge FCE", "Cambridge CAE"],
+      "amenities": [
+        "WiFi en todo el edificio",
+        "Sala de estudio 24/7",
+        "Cafetería",
+        "Sala de ordenadores",
+        "Zona de descanso social"
+      ],
+      "key_features": [
+        "Máximo 15 alumnos por clase",
+        "Ubicación en Midtown Toronto — zona segura y conectada",
+        "Parte de la red EC English con 30+ escuelas globales",
+        "Fuerte comunidad latinoamericana",
+        "Clases de General English, IELTS y Business English"
+      ],
+      "social_activities_offered": [
+        "Salidas a Niagara Falls",
+        "Visitas a CN Tower y Distillery District",
+        "Noches de juegos y language exchange",
+        "Excursiones a Ottawa y Montreal"
+      ],
+      "description": "EC English Toronto es la sede canadiense de la cadena global EC English, con más de 30 escuelas en el mundo. Ubicada en Midtown Toronto, cerca del metro Eglinton, combina clases pequeñas (máx. 15) con una fuerte comunidad latinoamericana y actividades sociales semanales. Sin Study Permit para cursos de hasta 6 meses con solo eTA ($7 CAD).",
+      "verdict_text": "Buena opción para latinos que buscan escuela reconocida internacionalmente con buen soporte en español y clases reducidas. Midtown es más tranquilo que el downtown pero está muy bien conectado.",
+      "best_for": "Estudiantes que buscan marca internacional reconocida y comunidad latina activa",
+      "pros": [
+        "Máximo 15 alumnos por clase",
+        "Red global EC — transferencia entre escuelas posible",
+        "Fuerte presencia latinoamericana — fácil ambientarse",
+        "Acreditación Languages Canada — reconocida por IRCC",
+        "Sin Study Permit hasta 6 meses (solo eTA)"
+      ],
+      "cons": [
+        "Midtown — no es el downtown más céntrico",
+        "Precio algo más alto que otras escuelas independientes",
+        "Alta proporción de alumnos hispanos puede reducir exposición al inglés"
+      ],
+      "score_location": 7.5,
+      "score_teachers": 8.0,
+      "score_facilities": 8.5,
+      "score_value": 7.5,
+      "score_social": 8.0,
+      "score_latam_support": 9.0,
+      "advisor_name": "Equipo Yaicos",
+      "last_reviewed_date": "2026-04-22",
+      "meta_title": "EC English Toronto | Inglés en Canadá | Yaicos",
+      "meta_description": "EC English Toronto: clases de inglés con máx. 15 alumnos, acreditación Languages Canada. Sin Study Permit hasta 6 meses. Ideal para latinoamericanos.",
+      "faq_items": [
+        {
+          "question": "¿Necesito Study Permit para estudiar en EC Toronto?",
+          "answer": "No si tu curso dura 6 meses o menos. Solo necesitas eTA ($7 CAD, se tramita online en 72h). Para cursos más largos sí se requiere Study Permit."
+        },
+        {
+          "question": "¿Cuántos alumnos hay por clase?",
+          "answer": "Máximo 15 estudiantes por clase — garantizado por EC English globalmente."
+        },
+        {
+          "question": "¿EC Toronto está acreditada en Canadá?",
+          "answer": "Sí. EC Toronto tiene acreditación Languages Canada (LCDN), el sello oficial de calidad reconocido por IRCC (inmigración canadiense)."
+        },
+        {
+          "question": "¿Cómo es la comunidad latina en EC Toronto?",
+          "answer": "Fuerte presencia de México, Colombia y Brasil. Es fácil encontrar compañeros hispanohablantes, aunque recomendamos equilibrar con actividades mixtas para maximizar el inglés."
+        }
+      ],
+      "definition_chunk": "EC English Toronto es una escuela de inglés en Midtown Toronto con máximo 15 alumnos por clase, acreditación Languages Canada e importante comunidad latinoamericana. Cursos hasta 6 meses sin Study Permit.",
+      "_destination_slug": "canada"
+    },
+    {
+      "name": "ILAC Vancouver",
+      "slug": "ilac-vancouver",
+      "city": "Vancouver",
+      "country": "Canada",
+      "country_code": "CA",
+      "school_type": "language_school",
+      "school_size": "large",
+      "currency": "CAD",
+      "address": "890 W Pender St, Vancouver, BC V6C 1J9",
+      "latitude": 49.2854,
+      "longitude": -123.1188,
+      "website_url": "https://www.ilac.com/en/locations/vancouver",
+      "is_featured": true,
+      "display_order": 2,
+      "commission_tier": "standard",
+      "accreditations": ["Languages Canada", "ICEF", "BC EQA"],
+      "max_class_size": 16,
+      "average_student_age": 27,
+      "nationalities_count": 35,
+      "nationality_mix": [
+        { "country": "Mexico", "percentage": 18 },
+        { "country": "Brazil", "percentage": 16 },
+        { "country": "Colombia", "percentage": 14 },
+        { "country": "Chile", "percentage": 8 }
+      ],
+      "language_levels_offered": ["A1", "A2", "B1", "B2", "C1", "C2"],
+      "exams_offered": ["IELTS", "TOEFL", "Cambridge FCE", "Cambridge CAE"],
+      "amenities": [
+        "WiFi en todo el edificio",
+        "Salón de estudiantes en planta baja",
+        "Cafetería con vistas al puerto",
+        "Sala de exámenes oficial IELTS",
+        "Zona de gaming y descanso",
+        "Servicio de asesoría migratoria"
+      ],
+      "key_features": [
+        "Máximo 16 alumnos por clase",
+        "Vistas al puerto y North Shore — Vancouver icónico",
+        "Mejor soporte a latinoamericanos de Canadá",
+        "Centro oficial IELTS en el mismo edificio",
+        "Servicio de visa y asesoría migratoria incluido",
+        "Homestay y residencias propias disponibles"
+      ],
+      "social_activities_offered": [
+        "Ski en Whistler y Grouse Mountain",
+        "Kayak en Indian Arm",
+        "Visitas a Victoria (Vancouver Island)",
+        "Senderismo en North Shore",
+        "Noches de cultura canadiense",
+        "Visitas a Granville Island y Stanley Park"
+      ],
+      "description": "ILAC (International Language Academy of Canada) Vancouver es reconocida como una de las mejores escuelas de inglés de Canadá para latinoamericanos. Ubicada en el downtown de Vancouver con vistas al puerto, combina clases de calidad (máx. 16 alumnos) con el mejor soporte en español del mercado, asesoría migratoria incluida y actividades sociales premium. Sin Study Permit para cursos hasta 6 meses con eTA ($7 CAD).",
+      "verdict_text": "La mejor opción para latinoamericanos que llegan a Canadá por primera vez. El soporte en español, la asesoría migratoria incluida y la comunidad latina activa hacen que la transición sea mucho más fácil. Vancouver añade calidad de vida incomparable.",
+      "best_for": "Latinoamericanos en primera experiencia en Canadá que valoran soporte en su idioma y calidad de vida",
+      "pros": [
+        "Mejor soporte a latinoamericanos del mercado canadiense",
+        "Asesoría migratoria incluida en la matrícula",
+        "Vancouver — una de las ciudades más seguras y vivibles del mundo",
+        "Centro oficial IELTS en el mismo edificio",
+        "Fuerte comunidad latinoamericana: MX, BR, CO, CL bien representados",
+        "Acreditaciones Languages Canada + BC EQA"
+      ],
+      "cons": [
+        "Vancouver es cara — alojamiento por encima de Toronto",
+        "Alta proporción de hispanos — requiere disciplina para hablar inglés fuera de clase",
+        "Waitlist en temporada alta (julio-agosto)"
+      ],
+      "score_location": 9.5,
+      "score_teachers": 8.5,
+      "score_facilities": 9.0,
+      "score_value": 7.5,
+      "score_social": 9.5,
+      "score_latam_support": 9.8,
+      "advisor_name": "Equipo Yaicos",
+      "last_reviewed_date": "2026-04-22",
+      "meta_title": "ILAC Vancouver | Inglés en Canadá | Yaicos",
+      "meta_description": "ILAC Vancouver: escuela favorita de latinoamericanos en Canadá. Máx. 16 alumnos, soporte en español, asesoría migratoria. Sin Study Permit hasta 6 meses.",
+      "faq_items": [
+        {
+          "question": "¿Necesito Study Permit para ILAC Vancouver?",
+          "answer": "No si tu curso dura 6 meses o menos. Solo necesitas eTA ($7 CAD, online, 72h). Para cursos más largos ILAC tiene asesores de visa que te guían en el proceso."
+        },
+        {
+          "question": "¿ILAC Vancouver habla español?",
+          "answer": "Sí. ILAC tiene personal de soporte en español y es la escuela con más años de experiencia atendiendo a latinoamericanos en Canadá. Su equipo de student services es referencia del sector."
+        },
+        {
+          "question": "¿Cuánto cuesta vivir en Vancouver mientras estudias?",
+          "answer": "Vancouver es cara comparada con Toronto. El alojamiento en homestay ronda CAD 1,000–1,400/mes (habitación + desayuno/cena). ILAC gestiona las familias directamente y hace el matching antes de llegar."
+        },
+        {
+          "question": "¿Dónde está ILAC Vancouver exactamente?",
+          "answer": "En 890 W Pender Street, downtown Vancouver, a 5 minutos a pie de Waterfront Station y con vistas al puerto y las montañas del North Shore. Zona completamente céntrica y segura."
+        },
+        {
+          "question": "¿Puedo hacer IELTS en ILAC Vancouver?",
+          "answer": "Sí. ILAC Vancouver es centro oficial de examen IELTS. Puedes prepararte y examinarte en el mismo edificio, lo que simplifica la logística."
+        }
+      ],
+      "definition_chunk": "ILAC Vancouver es la academia de inglés referente para latinoamericanos en Canadá, con soporte en español, asesoría migratoria y centro IELTS oficial. Máximo 16 alumnos por clase, cursos hasta 6 meses sin Study Permit.",
+      "_destination_slug": "canada"
+    }
+  ]
+}
